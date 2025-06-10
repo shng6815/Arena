@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "Arena",
+			"Path": "..\\Source\\Arena.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "ArenaEditor",
+			"Path": "..\\Source\\ArenaEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
