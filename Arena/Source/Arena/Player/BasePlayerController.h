@@ -32,17 +32,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> SprintAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> LookAction;
-
 	// Input Functions
 	void Move(const FInputActionValue& Value);
-	void Look(const FInputActionValue& Value);
-	void SprintStarted();
-	void SprintCompleted();
 
 	// Ability System
 	UPROPERTY()
@@ -51,12 +42,7 @@ protected:
 	UBaseAbilitySystemComponent* GetASC();
 
 private:
-	// Camera control
-	void UpdateCameraInput(float DeltaTime);
-	
+	// Future camera features will be added here
 	UPROPERTY(EditAnywhere, Category = "Camera")
-	float CameraRotationSpeed = 2.0f;
-	
-	UPROPERTY(EditAnywhere, Category = "Camera")
-	bool bEnableCameraRotation = true;
+	bool bEnableMouseLook = false; // For future use
 };

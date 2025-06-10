@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArenaModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ba0f03a11ae3889b006209518086ff3b611719e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+174123f90fdfd55cd4f434726c68916587e40199")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArenaModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArenaModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

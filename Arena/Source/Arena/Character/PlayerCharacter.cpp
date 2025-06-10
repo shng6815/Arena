@@ -9,7 +9,6 @@
 #include "Arena/Player/BasePlayerState.h"
 #include "Arena/Player/BasePlayerController.h"
 #include "Arena/AbilitySystem/BaseAttributeSet.h"
-#include "Net/UnrealNetwork.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -70,66 +69,6 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	// For now, just basic setup
 }
 
-void APlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(APlayerCharacter, bSprinting);
-}
-
-void APlayerCharacter::SetSprinting(bool bIsSprinting)
-{
-	if (bSprinting != bIsSprinting)
-	{
-		bSprinting = bIsSprinting;
-		UpdateMovementSpeed();
-
-		// Replicate to clients if this is the server
-		if (GetLocalRole() == ROLE_Authority)
-		{
-			OnRep_Sprinting();
-		}
-	}
-}
-
-void APlayerCharacter::OnRep_Sprinting()
-{
-	UpdateMovementSpeed();
-}
-
-void APlayerCharacter::Move(const FInputActionValue& Value)
-{
-	// Implementation will be added when we set up Enhanced Input
-	FVector2D MovementVector = Value.Get<FVector2D>();
-
-	if (Controller != nullptr)
-	{
-		// Find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		// Get forward direction
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-
-		// Get right direction 
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		// Add movement 
-		AddMovementInput(ForwardDirection, MovementVector.Y);
-		AddMovementInput(RightDirection, MovementVector.X);
-	}
-}
-
-void APlayerCharacter::Sprint()
-{
-	SetSprinting(true);
-}
-
-void APlayerCharacter::StopSprinting()
-{
-	SetSprinting(false);
-}
-
 void APlayerCharacter::InitAbilityActorInfo()
 {
 	ABasePlayerState* BasePlayerState = GetPlayerState<ABasePlayerState>();
@@ -145,17 +84,4 @@ void APlayerCharacter::InitAbilityActorInfo()
 			OnASCRegistered.Broadcast(AbilitySystemComponent);
 		}
 	}
-}
-
-void APlayerCharacter::UpdateMovementSpeed()
-{
-	// 이제 Speed 어트리뷰트 기반으로 계산!
-	float BaseSpeed = GetSpeed(); // AttributeSet에서 가져옴
-	
-	if (bSprinting)
-	{
-		BaseSpeed *= SprintMultiplier;
-	}
-	
-	SetSpeed(BaseSpeed); // BaseCharacter의 SetSpeed 호출
 }
