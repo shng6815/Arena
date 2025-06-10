@@ -53,6 +53,30 @@
     <ClCompile Include="..\..\Source\Arena\ArenaGameMode.h">
       <Filter>Source\Arena</Filter>
     </ClCompile>
+    <Filter Include="Source\Arena\AbilitySystem">
+      <UniqueIdentifier>{547610E0-D117-3589-970F-5A00624E09C1}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAbilitySystemComponent.cpp">
+      <Filter>Source\Arena\AbilitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAbilitySystemComponent.h">
+      <Filter>Source\Arena\AbilitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAttributeSet.cpp">
+      <Filter>Source\Arena\AbilitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAttributeSet.h">
+      <Filter>Source\Arena\AbilitySystem</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\AbilitySystem\Abilities">
+      <UniqueIdentifier>{51622AFA-3CC3-3AC0-AD2D-F8DD57434234}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\AbilitySystem\Abilities\BaseGameplayAbility.cpp">
+      <Filter>Source\Arena\AbilitySystem\Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\AbilitySystem\Abilities\BaseGameplayAbility.h">
+      <Filter>Source\Arena\AbilitySystem\Abilities</Filter>
+    </ClCompile>
     <Filter Include="Source\Arena\Character">
       <UniqueIdentifier>{D3DB8938-A912-3D1E-ABEF-30F95E6718FA}</UniqueIdentifier>
     </Filter>
@@ -75,6 +99,12 @@
       <Filter>Source\Arena\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Arena\Player\BasePlayerController.h">
+      <Filter>Source\Arena\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\Player\BasePlayerState.cpp">
+      <Filter>Source\Arena\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\Player\BasePlayerState.h">
       <Filter>Source\Arena\Player</Filter>
     </ClCompile>
   </ItemGroup>

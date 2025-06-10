@@ -5,7 +5,6 @@
 #include "InputActionValue.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Arena/AbilitySystem/BaseAbilitySystemComponent.h"
-#include "Arena/Character/PlayerCharacter.h"
 
 ABasePlayerController::ABasePlayerController()
 {
@@ -36,7 +35,7 @@ void ABasePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 	
-	UpdateCameraInput(DeltaTime);
+	// Future: Add mouse cursor logic here
 }
 
 void ABasePlayerController::SetupInputComponent()
@@ -50,19 +49,7 @@ void ABasePlayerController::SetupInputComponent()
 		if (MoveAction)
 		{
 			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABasePlayerController::Move);
-		}
-
-		// Sprint
-		if (SprintAction)
-		{
-			EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Started, this, &ABasePlayerController::SprintStarted);
-			EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Completed, this, &ABasePlayerController::SprintCompleted);
-		}
-
-		// Look (for camera rotation)
-		if (LookAction)
-		{
-			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABasePlayerController::Look);
+			UE_LOG(LogTemp, Log, TEXT("MoveAction bound successfully"));
 		}
 	}
 }
@@ -74,52 +61,18 @@ void ABasePlayerController::Move(const FInputActionValue& Value)
 
 	if (APawn* ControlledPawn = GetPawn())
 	{
-		if (APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(ControlledPawn))
-		{
-			// Forward/Right directions relative to camera
-			const FRotator Rotation = GetControlRotation();
-			const FRotator YawRotation(0, Rotation.Yaw, 0);
+		// Forward/Right directions relative to camera
+		const FRotator Rotation = GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-			// Get forward direction
-			const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-			// Get right direction 
-			const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		// Get forward direction
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		// Get right direction 
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
-			// Add movement 
-			ControlledPawn->AddMovementInput(ForwardDirection, MovementVector.Y);
-			ControlledPawn->AddMovementInput(RightDirection, MovementVector.X);
-		}
-	}
-}
-
-void ABasePlayerController::Look(const FInputActionValue& Value)
-{
-	if (!bEnableCameraRotation) return;
-
-	// Input is a Vector2D
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
-
-	if (LookAxisVector.X != 0.0f || LookAxisVector.Y != 0.0f)
-	{
-		// Add yaw and pitch input to controller
-		AddYawInput(LookAxisVector.X * CameraRotationSpeed);
-		AddPitchInput(LookAxisVector.Y * CameraRotationSpeed);
-	}
-}
-
-void ABasePlayerController::SprintStarted()
-{
-	if (APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(GetPawn()))
-	{
-		PlayerCharacter->Sprint();
-	}
-}
-
-void ABasePlayerController::SprintCompleted()
-{
-	if (APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(GetPawn()))
-	{
-		PlayerCharacter->StopSprinting();
+		// Add movement 
+		ControlledPawn->AddMovementInput(ForwardDirection, MovementVector.Y);
+		ControlledPawn->AddMovementInput(RightDirection, MovementVector.X);
 	}
 }
 
@@ -132,10 +85,4 @@ UBaseAbilitySystemComponent* ABasePlayerController::GetASC()
 		);
 	}
 	return BaseAbilitySystemComponent;
-}
-
-void ABasePlayerController::UpdateCameraInput(float DeltaTime)
-{
-	// Future: Add any camera-specific logic here
-	// For now, camera rotation is handled by Look input action
 }

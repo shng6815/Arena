@@ -171,14 +171,14 @@ AArenaCharacter::~AArenaCharacter() {}
 // End Class AArenaCharacter
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_user_Documents_Unreal_Projects_Arena_Source_Arena_ArenaCharacter_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_ArenaCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_AArenaCharacter, AArenaCharacter::StaticClass, TEXT("AArenaCharacter"), &Z_Registration_Info_UClass_AArenaCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AArenaCharacter), 3697853549U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Unreal_Projects_Arena_Source_Arena_ArenaCharacter_h_2546296063(TEXT("/Script/Arena"),
-	Z_CompiledInDeferFile_FID_Users_user_Documents_Unreal_Projects_Arena_Source_Arena_ArenaCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Unreal_Projects_Arena_Source_Arena_ArenaCharacter_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_ArenaCharacter_h_2546296063(TEXT("/Script/Arena"),
+	Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_ArenaCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_ArenaCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration
