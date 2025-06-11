@@ -1,4 +1,3 @@
-// PlayerCharacter.h
 #pragma once
 
 #include "CoreMinimal.h"
@@ -7,8 +6,6 @@
 
 class UCameraComponent;
 class USpringArmComponent;
-class UBaseAbilitySystemComponent;
-class UBaseAttributeSet;
 
 UCLASS()
 class ARENA_API APlayerCharacter : public ABaseCharacter

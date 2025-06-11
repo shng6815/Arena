@@ -1,18 +1,13 @@
-// PlayerCharacter.cpp
 #include "PlayerCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "EnhancedInputSubsystems.h"
-#include "EnhancedInputComponent.h"
-#include "InputActionValue.h"
 #include "Arena/Player/BasePlayerState.h"
 #include "Arena/Player/BasePlayerController.h"
-#include "Arena/AbilitySystem/BaseAttributeSet.h"
 
 APlayerCharacter::APlayerCharacter()
 {
-	// Camera Setup for Quarter View
+	// Camera Setup
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(RootComponent);
 	SpringArm->TargetArmLength = 1200.0f;
@@ -26,16 +21,10 @@ APlayerCharacter::APlayerCharacter()
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false;
 
-	// Movement Setup
-	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 640.0f, 0.0f);
-	GetCharacterMovement()->bConstrainToPlane = true;
-	GetCharacterMovement()->bSnapToPlaneAtStart = true;
-
-	// Don't use controller rotation
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
-	bUseControllerRotationRoll = false;
+	// 플레이어용 Movement 설정 (회전 관련)
+	GetCharacterMovement()->bOrientRotationToMovement = false;  // 이동 방향 회전 비활성화
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;  // 컨트롤러 회전 사용
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 }
 
 void APlayerCharacter::BeginPlay()
@@ -46,8 +35,6 @@ void APlayerCharacter::BeginPlay()
 void APlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
-
-	// Initialize ability actor info for the Server
 	InitAbilityActorInfo();
 	InitializeDefaultAttributes();
 	AddCharacterAbilities();
@@ -56,17 +43,13 @@ void APlayerCharacter::PossessedBy(AController* NewController)
 void APlayerCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
-
-	// Initialize ability actor info for the Client
 	InitAbilityActorInfo();
 }
 
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	// This will be expanded when we add Enhanced Input
-	// For now, just basic setup
+	// 입력은 이미 Controller에서 처리됨
 }
 
 void APlayerCharacter::InitAbilityActorInfo()
@@ -74,7 +57,6 @@ void APlayerCharacter::InitAbilityActorInfo()
 	ABasePlayerState* BasePlayerState = GetPlayerState<ABasePlayerState>();
 	if (BasePlayerState)
 	{
-		// Get ASC from PlayerState for multiplayer
 		AbilitySystemComponent = BasePlayerState->GetAbilitySystemComponent();
 		AttributeSet = BasePlayerState->GetAttributeSet();
 		
