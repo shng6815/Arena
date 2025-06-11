@@ -14,6 +14,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define ARENA_PlayerCharacter_generated_h
 
+#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execIsMoving); \
+	DECLARE_FUNCTION(execGetMovementDirection); \
+	DECLARE_FUNCTION(execGetMovementSpeed); \
+	DECLARE_FUNCTION(execGetSpineRotation); \
+	DECLARE_FUNCTION(execSetSpineRotation);
+
+
 #define FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAPlayerCharacter(); \
@@ -39,6 +47,7 @@ public: \
 #define FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
 	FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_INCLASS_NO_PURE_DECLS \
 	FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_ENHANCED_CONSTRUCTORS \
 private: \

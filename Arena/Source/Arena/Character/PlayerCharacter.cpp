@@ -21,9 +21,9 @@ APlayerCharacter::APlayerCharacter()
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false;
 
-	// 플레이어용 Movement 설정 (회전 관련)
+	// 플레이어용 Movement 설정
 	GetCharacterMovement()->bOrientRotationToMovement = false;  // 이동 방향 회전 비활성화
-	GetCharacterMovement()->bUseControllerDesiredRotation = true;  // 컨트롤러 회전 사용
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;  // Controller 회전 사용!
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 }
 
@@ -52,6 +52,49 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	// 입력은 이미 Controller에서 처리됨
 }
 
+void APlayerCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	UpdateAnimationData(DeltaTime);
+}
+
+void APlayerCharacter::SetSpineRotation(float Rotation)
+{
+	CurrentSpineRotation = Rotation;
+	// 여기서 직접 애니메이션 블루프린트 변수를 업데이트할 수도 있음
+}
+
+void APlayerCharacter::UpdateAnimationData(float DeltaTime)
+{
+	// Movement 데이터 계산
+	FVector Velocity = GetVelocity();
+	Velocity.Z = 0.0f; // 수평 속도만
+	
+	// 속도 계산 (0~1로 정규화)
+	float MaxWalkSpeed = GetCharacterMovement()->MaxWalkSpeed;
+	MovementSpeed = MaxWalkSpeed > 0.0f ? FMath::Clamp(Velocity.Size() / MaxWalkSpeed, 0.0f, 1.0f) : 0.0f;
+	
+	// 이동 여부
+	bIsMoving = MovementSpeed > 0.1f;
+	
+	// 이동 방향 계산 (캐릭터 기준 상대각도)
+	if (bIsMoving)
+	{
+		FVector ForwardVector = GetActorForwardVector();
+		FVector VelocityNormalized = Velocity.GetSafeNormal();
+		
+		// 캐릭터 Forward 기준으로 속도 벡터의 각도 계산
+		float DotProduct = FVector::DotProduct(ForwardVector, VelocityNormalized);
+		float CrossProduct = FVector::CrossProduct(ForwardVector, VelocityNormalized).Z;
+		
+		MovementDirection = FMath::Atan2(CrossProduct, DotProduct) * 180.0f / PI;
+	}
+	else
+	{
+		MovementDirection = 0.0f;
+	}
+}
+
 void APlayerCharacter::InitAbilityActorInfo()
 {
 	ABasePlayerState* BasePlayerState = GetPlayerState<ABasePlayerState>();
@@ -66,4 +109,20 @@ void APlayerCharacter::InitAbilityActorInfo()
 			OnASCRegistered.Broadcast(AbilitySystemComponent);
 		}
 	}
+}
+
+// Animation Interface 함수들 - 블루프린트에서 직접 호출 가능
+float APlayerCharacter::GetMovementSpeed() const
+{
+	return MovementSpeed;
+}
+
+float APlayerCharacter::GetMovementDirection() const
+{
+	return MovementDirection;
+}
+
+bool APlayerCharacter::IsMoving() const
+{
+	return bIsMoving;
 }

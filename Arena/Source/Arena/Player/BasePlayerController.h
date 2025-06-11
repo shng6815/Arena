@@ -40,12 +40,21 @@ protected:
 	// Input Functions
 	void Move(const FInputActionValue& Value);
 
-	// 회전 관련 설정
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
-	bool bEnableCursorRotation = true;
+	// Look System Settings
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
+	bool bEnableLookSystem = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
-	float MinRotationDistance = 50.0f; // 최소 회전 거리
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
+	float MinLookDistance = 50.0f; // 최소 Look 거리
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
+	float MaxSpineRotation = 45.0f; // 최대 척추 회전각
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
+	float SpineRotationSpeed = 5.0f; // 척추 회전 속도
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
+	float BodyRotationSpeed = 3.0f; // 몸체 회전 속도
 
 	// Ability System
 	UPROPERTY()
@@ -58,6 +67,13 @@ private:
 	FHitResult CursorHit;
 	void CursorTrace();
 	
-	// 회전 처리 (Controller의 책임!)
-	void HandleCursorRotation();
+	// Look System
+	float CurrentSpineRotation = 0.0f; // 현재 척추 회전각
+	void UpdateLookSystem(float DeltaTime);
+	FVector GetMouseWorldPosition() const;
+	
+	// Utility Functions
+	static float NormalizeAngle(float Angle);
+	static float AngleDifference(float From, float To);
+	static float LerpAngle(float Current, float Target, float DeltaTime, float Speed);
 };

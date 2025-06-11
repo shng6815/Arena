@@ -158,19 +158,49 @@ struct Z_Construct_UClass_ABasePlayerController_Statics
 		{ "ToolTip", "Input Actions" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bEnableCursorRotation_MetaData[] = {
-		{ "Category", "Rotation" },
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bEnableLookSystem_MetaData[] = {
+		{ "Category", "Look System" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// \xed\x9a\x8c\xec\xa0\x84 \xea\xb4\x80\xeb\xa0\xa8 \xec\x84\xa4\xec\xa0\x95\n" },
+		{ "Comment", "// Look System Settings\n" },
 #endif
 		{ "ModuleRelativePath", "Player/BasePlayerController.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "\xed\x9a\x8c\xec\xa0\x84 \xea\xb4\x80\xeb\xa0\xa8 \xec\x84\xa4\xec\xa0\x95" },
+		{ "ToolTip", "Look System Settings" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MinRotationDistance_MetaData[] = {
-		{ "Category", "Rotation" },
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MinLookDistance_MetaData[] = {
+		{ "Category", "Look System" },
 		{ "ModuleRelativePath", "Player/BasePlayerController.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxSpineRotation_MetaData[] = {
+		{ "Category", "Look System" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xec\xb5\x9c\xec\x86\x8c Look \xea\xb1\xb0\xeb\xa6\xac\n" },
+#endif
+		{ "ModuleRelativePath", "Player/BasePlayerController.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xec\xb5\x9c\xec\x86\x8c Look \xea\xb1\xb0\xeb\xa6\xac" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpineRotationSpeed_MetaData[] = {
+		{ "Category", "Look System" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xec\xb5\x9c\xeb\x8c\x80 \xec\xb2\x99\xec\xb6\x94 \xed\x9a\x8c\xec\xa0\x84\xea\xb0\x81\n" },
+#endif
+		{ "ModuleRelativePath", "Player/BasePlayerController.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xec\xb5\x9c\xeb\x8c\x80 \xec\xb2\x99\xec\xb6\x94 \xed\x9a\x8c\xec\xa0\x84\xea\xb0\x81" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BodyRotationSpeed_MetaData[] = {
+		{ "Category", "Look System" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xec\xb2\x99\xec\xb6\x94 \xed\x9a\x8c\xec\xa0\x84 \xec\x86\x8d\xeb\x8f\x84\n" },
+#endif
+		{ "ModuleRelativePath", "Player/BasePlayerController.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xec\xb2\x99\xec\xb6\x94 \xed\x9a\x8c\xec\xa0\x84 \xec\x86\x8d\xeb\x8f\x84" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BaseAbilitySystemComponent_MetaData[] = {
 #if !UE_BUILD_SHIPPING
@@ -185,9 +215,12 @@ struct Z_Construct_UClass_ABasePlayerController_Statics
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_DefaultMappingContext;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_MoveAction;
-	static void NewProp_bEnableCursorRotation_SetBit(void* Obj);
-	static const UECodeGen_Private::FBoolPropertyParams NewProp_bEnableCursorRotation;
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_MinRotationDistance;
+	static void NewProp_bEnableLookSystem_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bEnableLookSystem;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_MinLookDistance;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxSpineRotation;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpineRotationSpeed;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_BodyRotationSpeed;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BaseAbilitySystemComponent;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
@@ -203,18 +236,24 @@ struct Z_Construct_UClass_ABasePlayerController_Statics
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_DefaultMappingContext = { "DefaultMappingContext", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, DefaultMappingContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultMappingContext_MetaData), NewProp_DefaultMappingContext_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MoveAction = { "MoveAction", nullptr, (EPropertyFlags)0x0124080000000015, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, MoveAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MoveAction_MetaData), NewProp_MoveAction_MetaData) };
-void Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableCursorRotation_SetBit(void* Obj)
+void Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableLookSystem_SetBit(void* Obj)
 {
-	((ABasePlayerController*)Obj)->bEnableCursorRotation = 1;
+	((ABasePlayerController*)Obj)->bEnableLookSystem = 1;
 }
-const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableCursorRotation = { "bEnableCursorRotation", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ABasePlayerController), &Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableCursorRotation_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bEnableCursorRotation_MetaData), NewProp_bEnableCursorRotation_MetaData) };
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MinRotationDistance = { "MinRotationDistance", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, MinRotationDistance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MinRotationDistance_MetaData), NewProp_MinRotationDistance_MetaData) };
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableLookSystem = { "bEnableLookSystem", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ABasePlayerController), &Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableLookSystem_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bEnableLookSystem_MetaData), NewProp_bEnableLookSystem_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MinLookDistance = { "MinLookDistance", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, MinLookDistance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MinLookDistance_MetaData), NewProp_MinLookDistance_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MaxSpineRotation = { "MaxSpineRotation", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, MaxSpineRotation), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxSpineRotation_MetaData), NewProp_MaxSpineRotation_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_SpineRotationSpeed = { "SpineRotationSpeed", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, SpineRotationSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpineRotationSpeed_MetaData), NewProp_SpineRotationSpeed_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_BodyRotationSpeed = { "BodyRotationSpeed", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, BodyRotationSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BodyRotationSpeed_MetaData), NewProp_BodyRotationSpeed_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABasePlayerController_Statics::NewProp_BaseAbilitySystemComponent = { "BaseAbilitySystemComponent", nullptr, (EPropertyFlags)0x0124080000080008, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABasePlayerController, BaseAbilitySystemComponent), Z_Construct_UClass_UBaseAbilitySystemComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BaseAbilitySystemComponent_MetaData), NewProp_BaseAbilitySystemComponent_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABasePlayerController_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_DefaultMappingContext,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MoveAction,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableCursorRotation,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MinRotationDistance,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_bEnableLookSystem,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MinLookDistance,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_MaxSpineRotation,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_SpineRotationSpeed,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_BodyRotationSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABasePlayerController_Statics::NewProp_BaseAbilitySystemComponent,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ABasePlayerController_Statics::PropPointers) < 2048);
@@ -258,10 +297,10 @@ ABasePlayerController::~ABasePlayerController() {}
 struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerController_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ABasePlayerController, ABasePlayerController::StaticClass, TEXT("ABasePlayerController"), &Z_Registration_Info_UClass_ABasePlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABasePlayerController), 1863118453U) },
+		{ Z_Construct_UClass_ABasePlayerController, ABasePlayerController::StaticClass, TEXT("ABasePlayerController"), &Z_Registration_Info_UClass_ABasePlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABasePlayerController), 2815021255U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerController_h_1178485921(TEXT("/Script/Arena"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerController_h_4000103864(TEXT("/Script/Arena"),
 	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerController_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

@@ -4,6 +4,7 @@
 #include "InputActionValue.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Arena/AbilitySystem/BaseAbilitySystemComponent.h"
+#include "Arena/Character/PlayerCharacter.h"
 #include "GameFramework/Pawn.h"
 
 ABasePlayerController::ABasePlayerController()
@@ -11,10 +12,6 @@ ABasePlayerController::ABasePlayerController()
 	bReplicates = true;
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
-	
-	// 기본 설정
-	bEnableCursorRotation = true;
-	MinRotationDistance = 50.0f;
 }
 
 void ABasePlayerController::BeginPlay()
@@ -44,10 +41,10 @@ void ABasePlayerController::PlayerTick(float DeltaTime)
 	// 커서 위치 추적
 	CursorTrace();
 	
-	// 회전 처리 (Controller에서!)
-	if (bEnableCursorRotation)
+	// Look System 처리 (로컬 플레이어만)
+	if (bEnableLookSystem && IsLocalController())
 	{
-		HandleCursorRotation();
+		UpdateLookSystem(DeltaTime);
 	}
 }
 
@@ -82,33 +79,74 @@ void ABasePlayerController::CursorTrace()
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
 }
 
-void ABasePlayerController::HandleCursorRotation()
+void ABasePlayerController::UpdateLookSystem(float DeltaTime)
 {
-	// 로컬 플레이어만 처리
-	if (!IsLocalController()) return;
-	if (!CursorHit.bBlockingHit) return;
-	
-	APawn* ControlledPawn = GetPawn();
-	if (!ControlledPawn) return;
+	APlayerCharacter* PlayerChar = Cast<APlayerCharacter>(GetPawn());
+	if (!PlayerChar) return;
 
-	FVector CursorLocation = CursorHit.ImpactPoint;
-	FVector PawnLocation = ControlledPawn->GetActorLocation();
+	FVector MousePos = GetMouseWorldPosition();
+	FVector CharacterPos = PlayerChar->GetActorLocation();
 	
-	// 거리 체크 (너무 가까우면 회전하지 않음)
-	FVector Direction = CursorLocation - PawnLocation;
-	Direction.Z = 0.0f; // 수평 회전만
+	FVector Direction = MousePos - CharacterPos;
+	Direction.Z = 0.0f;
 	
-	if (Direction.Size() < MinRotationDistance)
+	// 최소 거리 체크
+	if (Direction.Size2D() < MinLookDistance)
 	{
-		return; // 너무 가까우면 회전하지 않음
+		return;
 	}
 	
-	if (!Direction.IsNearlyZero())
+	Direction.Normalize();
+	float TargetYaw = Direction.Rotation().Yaw;
+	float CurrentYaw = GetControlRotation().Yaw; // Controller 회전 기준!
+	float AngleToTarget = AngleDifference(CurrentYaw, TargetYaw);
+	
+	// 척추 회전 계산
+	float TargetSpineRotation = FMath::Clamp(AngleToTarget, -MaxSpineRotation, MaxSpineRotation);
+	CurrentSpineRotation = LerpAngle(CurrentSpineRotation, TargetSpineRotation, DeltaTime, SpineRotationSpeed);
+	
+	// 척추 회전을 PlayerCharacter에 적용
+	PlayerChar->SetSpineRotation(CurrentSpineRotation);
+	
+	// 몸체 회전 (척추 한계를 넘어설 때) - Controller 회전 사용!
+	if (FMath::Abs(AngleToTarget) > MaxSpineRotation)
 	{
-		// Controller가 회전을 담당!
-		FRotator TargetRotation = Direction.Rotation();
-		SetControlRotation(TargetRotation);
+		float ExcessAngle = AngleToTarget - FMath::Sign(AngleToTarget) * MaxSpineRotation;
+		float TargetBodyYaw = NormalizeAngle(CurrentYaw + ExcessAngle);
+		float NewBodyYaw = LerpAngle(CurrentYaw, TargetBodyYaw, DeltaTime, BodyRotationSpeed);
+		
+		// 멀티플레이어 안전한 Controller 회전!
+		SetControlRotation(FRotator(0, NewBodyYaw, 0));
 	}
+}
+
+FVector ABasePlayerController::GetMouseWorldPosition() const
+{
+	if (!CursorHit.bBlockingHit) 
+	{
+		APawn* ControlledPawn = GetPawn();
+		return ControlledPawn ? ControlledPawn->GetActorLocation() : FVector::ZeroVector;
+	}
+	
+	FVector MouseWorldPos = CursorHit.ImpactPoint;
+	APawn* ControlledPawn = GetPawn();
+	if (!ControlledPawn) return MouseWorldPos;
+	
+	FVector CharacterLocation = ControlledPawn->GetActorLocation();
+	
+	// Z축 보정
+	MouseWorldPos.Z = CharacterLocation.Z;
+	
+	// 최대 거리 제한 (1000 유닛)
+	FVector DiffVector = MouseWorldPos - CharacterLocation;
+	DiffVector.Z = 0.0f;
+	if (DiffVector.Size() > 1000.0f)
+	{
+		DiffVector.Normalize();
+		MouseWorldPos = CharacterLocation + DiffVector * 1000.0f;
+	}
+	
+	return MouseWorldPos;
 }
 
 UBaseAbilitySystemComponent* ABasePlayerController::GetASC()
@@ -120,4 +158,36 @@ UBaseAbilitySystemComponent* ABasePlayerController::GetASC()
 		);
 	}
 	return BaseAbilitySystemComponent;
+}
+
+// Utility Functions
+float ABasePlayerController::NormalizeAngle(float Angle)
+{
+	Angle = FMath::Fmod(Angle, 360.0f);
+	if (Angle > 180.0f) Angle -= 360.0f;
+	else if (Angle < -180.0f) Angle += 360.0f;
+	return Angle;
+}
+
+float ABasePlayerController::AngleDifference(float From, float To)
+{
+	From = NormalizeAngle(From);
+	To = NormalizeAngle(To);
+	
+	float Difference = To - From;
+	if (Difference > 180.0f) Difference -= 360.0f;
+	else if (Difference < -180.0f) Difference += 360.0f;
+	
+	return Difference;
+}
+
+float ABasePlayerController::LerpAngle(float Current, float Target, float DeltaTime, float Speed)
+{
+	if (Speed <= 0.0f) return Target;
+	
+	float Diff = AngleDifference(Current, Target);
+	if (FMath::Abs(Diff) < 0.01f) return Target;
+	
+	float DeltaMove = Diff * FMath::Clamp(DeltaTime * Speed, 0.0f, 1.0f);
+	return NormalizeAngle(Current + DeltaMove);
 }
