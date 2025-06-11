@@ -54,9 +54,17 @@ void ABasePlayerController::SetupInputComponent()
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
 	{
+		// Move
 		if (MoveAction)
 		{
 			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABasePlayerController::Move);
+		}
+
+		// Attack
+		if (AttackAction)
+		{
+			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this, &ABasePlayerController::AttackStarted);
+			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Completed, this, &ABasePlayerController::AttackCompleted);
 		}
 	}
 }
@@ -70,6 +78,42 @@ void ABasePlayerController::Move(const FInputActionValue& Value)
 		// 월드 좌표 기준으로 이동
 		ControlledPawn->AddMovementInput(FVector::ForwardVector, MovementVector.Y);
 		ControlledPawn->AddMovementInput(FVector::RightVector, MovementVector.X);
+	}
+}
+
+void ABasePlayerController::AttackStarted(const FInputActionValue& Value)
+{
+	// 마우스 버튼 눌렀을 때 - 하드코딩 태그
+	AbilityInputTagPressed(FGameplayTag::RequestGameplayTag(FName("InputTag.LMB")));
+}
+
+void ABasePlayerController::AttackCompleted(const FInputActionValue& Value)
+{
+	// 마우스 버튼 뺐을 때 - 하드코딩 태그
+	AbilityInputTagReleased(FGameplayTag::RequestGameplayTag(FName("InputTag.LMB")));
+}
+
+void ABasePlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	if (GetASC())
+	{
+		GetASC()->AbilityInputTagPressed(InputTag);
+	}
+}
+
+void ABasePlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	if (GetASC())
+	{
+		GetASC()->AbilityInputTagReleased(InputTag);
+	}
+}
+
+void ABasePlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
+{
+	if (GetASC())
+	{
+		GetASC()->AbilityInputTagHeld(InputTag);
 	}
 }
 
