@@ -56,23 +56,13 @@ void ABasePlayerController::SetupInputComponent()
 
 void ABasePlayerController::Move(const FInputActionValue& Value)
 {
-	// Input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
 	if (APawn* ControlledPawn = GetPawn())
 	{
-		// Forward/Right directions relative to camera
-		const FRotator Rotation = GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		// Get forward direction
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		// Get right direction 
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		// Add movement 
-		ControlledPawn->AddMovementInput(ForwardDirection, MovementVector.Y);
-		ControlledPawn->AddMovementInput(RightDirection, MovementVector.X);
+		// 월드 좌표 기준으로 간단하게!
+		ControlledPawn->AddMovementInput(FVector::ForwardVector, MovementVector.Y);  // W/S
+		ControlledPawn->AddMovementInput(FVector::RightVector, MovementVector.X);    // A/D
 	}
 }
 
