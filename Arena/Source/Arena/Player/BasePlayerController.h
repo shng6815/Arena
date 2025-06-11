@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "GameplayTagContainer.h"
 #include "BasePlayerController.generated.h"
 
 class UInputMappingContext;
@@ -25,6 +26,11 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Cursor")
 	bool GetCursorHitResult() const { return CursorHit.bBlockingHit; }
 
+	// 어빌리티 입력 처리
+	void AbilityInputTagPressed(FGameplayTag InputTag);
+	void AbilityInputTagReleased(FGameplayTag InputTag);
+	void AbilityInputTagHeld(FGameplayTag InputTag);
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -37,8 +43,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> AttackAction; // 좌클릭 공격
+
 	// Input Functions
 	void Move(const FInputActionValue& Value);
+
+	void AttackStarted(const FInputActionValue& Value);
+	void AttackCompleted(const FInputActionValue& Value);
 
 	// Look System Settings
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
@@ -66,12 +78,12 @@ private:
 	// 마우스 커서 추적
 	FHitResult CursorHit;
 	void CursorTrace();
-	
+
 	// Look System
 	float CurrentSpineRotation = 0.0f; // 현재 척추 회전각
 	void UpdateLookSystem(float DeltaTime);
 	FVector GetMouseWorldPosition() const;
-	
+
 	// Utility Functions
 	static float NormalizeAngle(float Angle);
 	static float AngleDifference(float From, float To);
