@@ -4,6 +4,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Arena/Player/BasePlayerState.h"
 #include "Arena/Player/BasePlayerController.h"
+#include "Net/UnrealNetwork.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -46,6 +47,13 @@ void APlayerCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
+void APlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	DOREPLIFETIME(APlayerCharacter, CurrentSpineRotation);
+}
+
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -55,7 +63,16 @@ void APlayerCharacter::Tick(float DeltaTime)
 void APlayerCharacter::SetSpineRotation(float Rotation)
 {
 	CurrentSpineRotation = Rotation;
-	// 여기서 직접 애니메이션 블루프린트 변수를 업데이트할 수도 있음
+	
+	if (!HasAuthority())
+	{
+		ServerSetSpineRotation(Rotation);
+	}
+}
+
+void APlayerCharacter::ServerSetSpineRotation_Implementation(float Rotation)
+{
+    CurrentSpineRotation = Rotation;
 }
 
 void APlayerCharacter::UpdateAnimationData(float DeltaTime)

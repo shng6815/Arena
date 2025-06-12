@@ -15,6 +15,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define ARENA_PlayerCharacter_generated_h
 
 #define FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void ServerSetSpineRotation_Implementation(float Rotation); \
+	DECLARE_FUNCTION(execServerSetSpineRotation); \
 	DECLARE_FUNCTION(execIsMoving); \
 	DECLARE_FUNCTION(execGetMovementDirection); \
 	DECLARE_FUNCTION(execGetMovementSpeed); \
@@ -22,13 +24,20 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execSetSpineRotation);
 
 
+#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_CALLBACK_WRAPPERS
 #define FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAPlayerCharacter(); \
 	friend struct Z_Construct_UClass_APlayerCharacter_Statics; \
 public: \
 	DECLARE_CLASS(APlayerCharacter, ABaseCharacter, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Arena"), NO_API) \
-	DECLARE_SERIALIZER(APlayerCharacter)
+	DECLARE_SERIALIZER(APlayerCharacter) \
+	enum class ENetFields_Private : uint16 \
+	{ \
+		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
+		CurrentSpineRotation=NETFIELD_REP_START, \
+		NETFIELD_REP_END=CurrentSpineRotation	}; \
+	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
 #define FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_ENHANCED_CONSTRUCTORS \
@@ -48,6 +57,7 @@ public: \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
 	FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_CALLBACK_WRAPPERS \
 	FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_INCLASS_NO_PURE_DECLS \
 	FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_13_ENHANCED_CONSTRUCTORS \
 private: \

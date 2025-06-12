@@ -11,7 +11,7 @@ UBasicAttackAbility::UBasicAttackAbility()
 {
 	// 어빌리티 기본 설정
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
-	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
+	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::ServerOnly;
 }
 
 void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -21,6 +21,8 @@ void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
+	if (!HasAuthority(&ActivationInfo)) return;
+	
 	// 연속 공격 시작
 	bIsAttacking = true;
 	PerformAttack(); // 첫 번째 공격 즉시 실행
@@ -51,6 +53,7 @@ void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
 	// 타이머 정리
 	if (AttackTimerHandle.IsValid())
 	{
+		UE_LOG(LogTemp, Warning, TEXT("End Ability"));
 		GetWorld()->GetTimerManager().ClearTimer(AttackTimerHandle);
 	}
 

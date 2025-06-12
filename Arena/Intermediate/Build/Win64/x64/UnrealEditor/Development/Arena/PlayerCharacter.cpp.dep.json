@@ -104,7 +104,9 @@
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\playerstate.generated.h",
             "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseplayerstate.generated.h",
             "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\player\\baseplayercontroller.h",
-            "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseplayercontroller.generated.h"
+            "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseplayercontroller.generated.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\public\\net\\unrealnetwork.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\net\\core\\public\\net\\core\\propertyconditions\\propertyconditions.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

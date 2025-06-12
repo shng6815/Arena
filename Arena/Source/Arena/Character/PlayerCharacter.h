@@ -18,6 +18,7 @@ public:
 	// APawn interface
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	// Look System Interface
 	UFUNCTION(BlueprintCallable, Category = "Look System")
@@ -46,12 +47,16 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> Camera;
+	
+	UFUNCTION(Server, Reliable)
+	void ServerSetSpineRotation(float Rotation);
 
 	// Ability System Override
 	virtual void InitAbilityActorInfo() override;
 
 private:
 	// Look System 상태
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Look System", meta = (AllowPrivateAccess = "true"))
 	float CurrentSpineRotation = 0.0f;
 	
 	// Animation 상태 (블루프린트에서 사용)

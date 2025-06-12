@@ -197,6 +197,56 @@ DEFINE_FUNCTION(APlayerCharacter::execIsMoving)
 }
 // End Class APlayerCharacter Function IsMoving
 
+// Begin Class APlayerCharacter Function ServerSetSpineRotation
+struct PlayerCharacter_eventServerSetSpineRotation_Parms
+{
+	float Rotation;
+};
+static const FName NAME_APlayerCharacter_ServerSetSpineRotation = FName(TEXT("ServerSetSpineRotation"));
+void APlayerCharacter::ServerSetSpineRotation(float Rotation)
+{
+	PlayerCharacter_eventServerSetSpineRotation_Parms Parms;
+	Parms.Rotation=Rotation;
+	UFunction* Func = FindFunctionChecked(NAME_APlayerCharacter_ServerSetSpineRotation);
+	ProcessEvent(Func,&Parms);
+}
+struct Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_Rotation;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::NewProp_Rotation = { "Rotation", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(PlayerCharacter_eventServerSetSpineRotation_Parms, Rotation), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::NewProp_Rotation,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APlayerCharacter, nullptr, "ServerSetSpineRotation", nullptr, nullptr, Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::PropPointers), sizeof(PlayerCharacter_eventServerSetSpineRotation_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00280CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::Function_MetaDataParams), Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::Function_MetaDataParams) };
+static_assert(sizeof(PlayerCharacter_eventServerSetSpineRotation_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(APlayerCharacter::execServerSetSpineRotation)
+{
+	P_GET_PROPERTY(FFloatProperty,Z_Param_Rotation);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->ServerSetSpineRotation_Implementation(Z_Param_Rotation);
+	P_NATIVE_END;
+}
+// End Class APlayerCharacter Function ServerSetSpineRotation
+
 // Begin Class APlayerCharacter Function SetSpineRotation
 struct Z_Construct_UFunction_APlayerCharacter_SetSpineRotation_Statics
 {
@@ -255,6 +305,7 @@ void APlayerCharacter::StaticRegisterNativesAPlayerCharacter()
 		{ "GetMovementSpeed", &APlayerCharacter::execGetMovementSpeed },
 		{ "GetSpineRotation", &APlayerCharacter::execGetSpineRotation },
 		{ "IsMoving", &APlayerCharacter::execIsMoving },
+		{ "ServerSetSpineRotation", &APlayerCharacter::execServerSetSpineRotation },
 		{ "SetSpineRotation", &APlayerCharacter::execSetSpineRotation },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -288,9 +339,21 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentSpineRotation_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Look System" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Look System \xec\x83\x81\xed\x83\x9c\n" },
+#endif
+		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Look System \xec\x83\x81\xed\x83\x9c" },
+#endif
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SpringArm;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Camera;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentSpineRotation;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -298,6 +361,7 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 		{ &Z_Construct_UFunction_APlayerCharacter_GetMovementSpeed, "GetMovementSpeed" }, // 1977512818
 		{ &Z_Construct_UFunction_APlayerCharacter_GetSpineRotation, "GetSpineRotation" }, // 3885843422
 		{ &Z_Construct_UFunction_APlayerCharacter_IsMoving, "IsMoving" }, // 2341767871
+		{ &Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation, "ServerSetSpineRotation" }, // 275439917
 		{ &Z_Construct_UFunction_APlayerCharacter_SetSpineRotation, "SetSpineRotation" }, // 3578193387
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -308,9 +372,11 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APlayerCharacter_Statics::NewProp_SpringArm = { "SpringArm", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APlayerCharacter, SpringArm), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpringArm_MetaData), NewProp_SpringArm_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APlayerCharacter_Statics::NewProp_Camera = { "Camera", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APlayerCharacter, Camera), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Camera_MetaData), NewProp_Camera_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_APlayerCharacter_Statics::NewProp_CurrentSpineRotation = { "CurrentSpineRotation", nullptr, (EPropertyFlags)0x0040000000000034, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APlayerCharacter, CurrentSpineRotation), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentSpineRotation_MetaData), NewProp_CurrentSpineRotation_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_APlayerCharacter_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp_SpringArm,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp_Camera,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerCharacter_Statics::NewProp_CurrentSpineRotation,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_APlayerCharacter_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_APlayerCharacter_Statics::DependentSingletons[])() = {
@@ -345,6 +411,13 @@ template<> ARENA_API UClass* StaticClass<APlayerCharacter>()
 {
 	return APlayerCharacter::StaticClass();
 }
+void APlayerCharacter::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
+{
+	static const FName Name_CurrentSpineRotation(TEXT("CurrentSpineRotation"));
+	const bool bIsValid = true
+		&& Name_CurrentSpineRotation == ClassReps[(int32)ENetFields_Private::CurrentSpineRotation].Property->GetFName();
+	checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in APlayerCharacter"));
+}
 DEFINE_VTABLE_PTR_HELPER_CTOR(APlayerCharacter);
 APlayerCharacter::~APlayerCharacter() {}
 // End Class APlayerCharacter
@@ -353,10 +426,10 @@ APlayerCharacter::~APlayerCharacter() {}
 struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APlayerCharacter, APlayerCharacter::StaticClass, TEXT("APlayerCharacter"), &Z_Registration_Info_UClass_APlayerCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerCharacter), 2606369282U) },
+		{ Z_Construct_UClass_APlayerCharacter, APlayerCharacter::StaticClass, TEXT("APlayerCharacter"), &Z_Registration_Info_UClass_APlayerCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerCharacter), 3889364102U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_215191853(TEXT("/Script/Arena"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_2586676173(TEXT("/Script/Arena"),
 	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
