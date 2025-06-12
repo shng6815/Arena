@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Arena/AbilitySystem/BaseAttributeSet.h"
+#include "Arena/Public/AbilitySystem/BaseAttributeSet.h"
 #include "GameplayAbilities/Public/AttributeSet.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeBaseAttributeSet() {}
@@ -41,33 +41,33 @@ struct Z_Construct_UScriptStruct_FEffectProperties_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SourceASC_MetaData[] = {
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SourceAvatarActor_MetaData[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SourceController_MetaData[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SourceCharacter_MetaData[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetASC_MetaData[] = {
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetAvatarActor_MetaData[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetController_MetaData[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetCharacter_MetaData[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SourceASC;
@@ -139,7 +139,7 @@ struct Z_Construct_UFunction_UBaseAttributeSet_OnRep_Durability_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// RepNotify functions\n" },
 #endif
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "RepNotify functions" },
 #endif
@@ -187,7 +187,7 @@ struct Z_Construct_UFunction_UBaseAttributeSet_OnRep_MaxDurability_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OldMaxDurability_MetaData[] = {
 		{ "NativeConst", "" },
@@ -232,7 +232,7 @@ struct Z_Construct_UFunction_UBaseAttributeSet_OnRep_MaxShield_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OldMaxShield_MetaData[] = {
 		{ "NativeConst", "" },
@@ -277,7 +277,7 @@ struct Z_Construct_UFunction_UBaseAttributeSet_OnRep_Output_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OldOutput_MetaData[] = {
 		{ "NativeConst", "" },
@@ -322,7 +322,7 @@ struct Z_Construct_UFunction_UBaseAttributeSet_OnRep_Shield_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OldShield_MetaData[] = {
 		{ "NativeConst", "" },
@@ -367,7 +367,7 @@ struct Z_Construct_UFunction_UBaseAttributeSet_OnRep_Speed_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OldSpeed_MetaData[] = {
 		{ "NativeConst", "" },
@@ -427,28 +427,28 @@ struct Z_Construct_UClass_UBaseAttributeSet_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "IncludePath", "AbilitySystem/BaseAttributeSet.h" },
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Durability_MetaData[] = {
 		{ "Category", "Core Attributes" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/*\n\x09 * \xea\xb2\x8c\xec\x9e\x84 \xed\x95\xb5\xec\x8b\xac \xec\x8a\xa4\xed\x83\xaf 4\xea\xb0\x9c\n\x09 */// \xeb\x82\xb4\xea\xb5\xac\xeb\x8f\x84 (\xec\xb2\xb4\xeb\xa0\xa5)\n" },
 #endif
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "* \xea\xb2\x8c\xec\x9e\x84 \xed\x95\xb5\xec\x8b\xac \xec\x8a\xa4\xed\x83\xaf 4\xea\xb0\x9c\n// \xeb\x82\xb4\xea\xb5\xac\xeb\x8f\x84 (\xec\xb2\xb4\xeb\xa0\xa5)" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxDurability_MetaData[] = {
 		{ "Category", "Core Attributes" },
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Speed_MetaData[] = {
 		{ "Category", "Core Attributes" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// \xec\x86\x8d\xeb\x8f\x84\n" },
 #endif
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "\xec\x86\x8d\xeb\x8f\x84" },
 #endif
@@ -458,21 +458,21 @@ struct Z_Construct_UClass_UBaseAttributeSet_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// \xec\x8b\xa4\xeb\x93\x9c (\xeb\xb0\xa9\xec\x96\xb4\xeb\xa0\xa5)\n" },
 #endif
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "\xec\x8b\xa4\xeb\x93\x9c (\xeb\xb0\xa9\xec\x96\xb4\xeb\xa0\xa5)" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MaxShield_MetaData[] = {
 		{ "Category", "Core Attributes" },
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Output_MetaData[] = {
 		{ "Category", "Core Attributes" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// \xec\xb6\x9c\xeb\xa0\xa5 (\xea\xb3\xb5\xea\xb2\xa9\xeb\xa0\xa5)\n" },
 #endif
-		{ "ModuleRelativePath", "AbilitySystem/BaseAttributeSet.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAttributeSet.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "\xec\xb6\x9c\xeb\xa0\xa5 (\xea\xb3\xb5\xea\xb2\xa9\xeb\xa0\xa5)" },
 #endif
@@ -487,12 +487,12 @@ struct Z_Construct_UClass_UBaseAttributeSet_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Durability, "OnRep_Durability" }, // 2227619651
-		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_MaxDurability, "OnRep_MaxDurability" }, // 503122919
-		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_MaxShield, "OnRep_MaxShield" }, // 2814338852
-		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Output, "OnRep_Output" }, // 3329949171
-		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Shield, "OnRep_Shield" }, // 3811937780
-		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Speed, "OnRep_Speed" }, // 163144857
+		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Durability, "OnRep_Durability" }, // 3268023788
+		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_MaxDurability, "OnRep_MaxDurability" }, // 4045893744
+		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_MaxShield, "OnRep_MaxShield" }, // 2480623965
+		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Output, "OnRep_Output" }, // 1740550504
+		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Shield, "OnRep_Shield" }, // 3795907086
+		{ &Z_Construct_UFunction_UBaseAttributeSet_OnRep_Speed, "OnRep_Speed" }, // 3810375833
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -569,18 +569,18 @@ UBaseAttributeSet::~UBaseAttributeSet() {}
 // End Class UBaseAttributeSet
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAttributeSet_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FEffectProperties::StaticStruct, Z_Construct_UScriptStruct_FEffectProperties_Statics::NewStructOps, TEXT("EffectProperties"), &Z_Registration_Info_UScriptStruct_EffectProperties, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FEffectProperties), 3687550993U) },
+		{ FEffectProperties::StaticStruct, Z_Construct_UScriptStruct_FEffectProperties_Statics::NewStructOps, TEXT("EffectProperties"), &Z_Registration_Info_UScriptStruct_EffectProperties, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FEffectProperties), 657981824U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UBaseAttributeSet, UBaseAttributeSet::StaticClass, TEXT("UBaseAttributeSet"), &Z_Registration_Info_UClass_UBaseAttributeSet, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBaseAttributeSet), 886776179U) },
+		{ Z_Construct_UClass_UBaseAttributeSet, UBaseAttributeSet::StaticClass, TEXT("UBaseAttributeSet"), &Z_Registration_Info_UClass_UBaseAttributeSet, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBaseAttributeSet), 133692836U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAttributeSet_h_2168820145(TEXT("/Script/Arena"),
-	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAttributeSet_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAttributeSet_h_Statics::ClassInfo),
-	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAttributeSet_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAttributeSet_h_Statics::ScriptStructInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_2019365062(TEXT("/Script/Arena"),
+	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_Statics::ClassInfo),
+	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_Statics::ScriptStructInfo),
 	nullptr, 0);
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

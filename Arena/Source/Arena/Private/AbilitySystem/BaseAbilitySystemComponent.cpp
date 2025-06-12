@@ -1,6 +1,6 @@
 ﻿// BaseAbilitySystemComponent.cpp
-#include "BaseAbilitySystemComponent.h"
-#include "Abilities/BaseGameplayAbility.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/BaseGameplayAbility.h"
 
 void UBaseAbilitySystemComponent::AbilityActorInfoSet()
 {

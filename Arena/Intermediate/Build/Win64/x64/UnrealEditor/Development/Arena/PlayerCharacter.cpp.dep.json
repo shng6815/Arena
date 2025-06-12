@@ -1,13 +1,13 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\character\\playercharacter.cpp",
+        "Source": "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\private\\character\\playercharacter.cpp",
         "ProvidedModule": "",
         "PCH": "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\x64\\arenaeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
         "Includes": [
             "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\arena\\definitions.arena.h",
-            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\character\\playercharacter.h",
-            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\character\\basecharacter.h",
+            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\public\\character\\playercharacter.h",
+            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\public\\character\\basecharacter.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\abilitysysteminterface.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\intermediate\\build\\win64\\unrealeditor\\inc\\gameplayabilities\\uht\\abilitysysteminterface.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
@@ -48,8 +48,8 @@
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\public\\charactermovementcomponentasync.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementcomponentasync.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\charactermovementcomponent.generated.h",
-            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\player\\baseplayerstate.h",
-            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\abilitysystem\\baseattributeset.h",
+            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\public\\player\\baseplayerstate.h",
+            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\public\\abilitysystem\\baseattributeset.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\attributeset.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\intermediate\\build\\win64\\unrealeditor\\inc\\gameplayabilities\\uht\\attributeset.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\abilitysystemcomponent.h",
@@ -103,7 +103,7 @@
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\classes\\gameframework\\playerstate.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\playerstate.generated.h",
             "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseplayerstate.generated.h",
-            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\player\\baseplayercontroller.h",
+            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\public\\player\\baseplayercontroller.h",
             "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseplayercontroller.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\public\\net\\unrealnetwork.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\net\\core\\public\\net\\core\\propertyconditions\\propertyconditions.h"

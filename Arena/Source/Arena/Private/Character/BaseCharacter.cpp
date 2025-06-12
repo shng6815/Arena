@@ -1,8 +1,9 @@
 // BaseCharacter.cpp
-#include "BaseCharacter.h"
+#include "Character/BaseCharacter.h"
+
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/BaseAbilitySystemComponent.h"
-#include "Arena/AbilitySystem/BaseAttributeSet.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Components/CapsuleComponent.h"

@@ -1,9 +1,10 @@
-#include "PlayerCharacter.h"
+#include "Character/PlayerCharacter.h"
+
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Arena/Player/BasePlayerState.h"
-#include "Arena/Player/BasePlayerController.h"
+#include "Player/BasePlayerState.h"
+#include "Player/BasePlayerController.h"
 #include "Net/UnrealNetwork.h"
 
 APlayerCharacter::APlayerCharacter()

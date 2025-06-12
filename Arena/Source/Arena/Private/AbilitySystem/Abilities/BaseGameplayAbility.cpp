@@ -1,6 +1,6 @@
 ﻿// BaseGameplayAbility.cpp
-#include "BaseGameplayAbility.h"
-#include "Arena/AbilitySystem/BaseAttributeSet.h"
+#include "AbilitySystem/Abilities/BaseGameplayAbility.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 
 UBaseGameplayAbility::UBaseGameplayAbility()
 {

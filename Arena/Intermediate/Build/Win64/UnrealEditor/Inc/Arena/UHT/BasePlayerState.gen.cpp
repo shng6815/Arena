@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Arena/Player/BasePlayerState.h"
+#include "Arena/Public/Player/BasePlayerState.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeBasePlayerState() {}
 
@@ -34,18 +34,18 @@ struct Z_Construct_UClass_ABasePlayerState_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "HideCategories", "Input Movement Collision Rendering HLOD WorldPartition DataLayers Transformation" },
 		{ "IncludePath", "Player/BasePlayerState.h" },
-		{ "ModuleRelativePath", "Player/BasePlayerState.h" },
+		{ "ModuleRelativePath", "Public/Player/BasePlayerState.h" },
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AbilitySystemComponent_MetaData[] = {
 		{ "Category", "AbilitySystem" },
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Player/BasePlayerState.h" },
+		{ "ModuleRelativePath", "Public/Player/BasePlayerState.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AttributeSet_MetaData[] = {
 		{ "Category", "AbilitySystem" },
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Player/BasePlayerState.h" },
+		{ "ModuleRelativePath", "Public/Player/BasePlayerState.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_AbilitySystemComponent;
@@ -105,14 +105,14 @@ ABasePlayerState::~ABasePlayerState() {}
 // End Class ABasePlayerState
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerState_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Player_BasePlayerState_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ABasePlayerState, ABasePlayerState::StaticClass, TEXT("ABasePlayerState"), &Z_Registration_Info_UClass_ABasePlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABasePlayerState), 2643675085U) },
+		{ Z_Construct_UClass_ABasePlayerState, ABasePlayerState::StaticClass, TEXT("ABasePlayerState"), &Z_Registration_Info_UClass_ABasePlayerState, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABasePlayerState), 3568957299U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerState_h_600274718(TEXT("/Script/Arena"),
-	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Player_BasePlayerState_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Player_BasePlayerState_h_2729585993(TEXT("/Script/Arena"),
+	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Player_BasePlayerState_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Player_BasePlayerState_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

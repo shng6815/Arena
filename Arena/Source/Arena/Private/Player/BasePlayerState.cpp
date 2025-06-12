@@ -1,7 +1,8 @@
 ﻿// BasePlayerState.cpp
-#include "BasePlayerState.h"
-#include "Arena/AbilitySystem/BaseAbilitySystemComponent.h"
-#include "Arena/AbilitySystem/BaseAttributeSet.h"
+#include "Player/BasePlayerState.h"
+
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 
 ABasePlayerState::ABasePlayerState()
 {

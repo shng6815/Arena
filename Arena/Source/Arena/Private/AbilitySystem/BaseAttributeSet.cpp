@@ -1,6 +1,5 @@
 ﻿// BaseAttributeSet.cpp
-#include "BaseAttributeSet.h"
-
+#include "AbilitySystem/BaseAttributeSet.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GameplayEffectExtension.h"
 #include "GameFramework/Character.h"

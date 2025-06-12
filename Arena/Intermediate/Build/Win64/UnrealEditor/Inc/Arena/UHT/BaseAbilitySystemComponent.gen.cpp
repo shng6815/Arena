@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Arena/AbilitySystem/BaseAbilitySystemComponent.h"
+#include "Arena/Public/AbilitySystem/BaseAbilitySystemComponent.h"
 #include "GameplayAbilities/Public/ActiveGameplayEffectHandle.h"
 #include "GameplayAbilities/Public/GameplayEffect.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
@@ -42,7 +42,7 @@ struct Z_Construct_UFunction_UBaseAbilitySystemComponent_ClientEffectApplied_Sta
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "AbilitySystem/BaseAbilitySystemComponent.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAbilitySystemComponent.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AbilitySystemComponent_MetaData[] = {
 		{ "EditInline", "true" },
@@ -109,12 +109,12 @@ struct Z_Construct_UClass_UBaseAbilitySystemComponent_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "HideCategories", "Object LOD Lighting Transform Sockets TextureStreaming Object LOD Lighting Transform Sockets TextureStreaming" },
 		{ "IncludePath", "AbilitySystem/BaseAbilitySystemComponent.h" },
-		{ "ModuleRelativePath", "AbilitySystem/BaseAbilitySystemComponent.h" },
+		{ "ModuleRelativePath", "Public/AbilitySystem/BaseAbilitySystemComponent.h" },
 	};
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UBaseAbilitySystemComponent_ClientEffectApplied, "ClientEffectApplied" }, // 4117305687
+		{ &Z_Construct_UFunction_UBaseAbilitySystemComponent_ClientEffectApplied, "ClientEffectApplied" }, // 3235113127
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -160,14 +160,14 @@ UBaseAbilitySystemComponent::~UBaseAbilitySystemComponent() {}
 // End Class UBaseAbilitySystemComponent
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAbilitySystemComponent_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAbilitySystemComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UBaseAbilitySystemComponent, UBaseAbilitySystemComponent::StaticClass, TEXT("UBaseAbilitySystemComponent"), &Z_Registration_Info_UClass_UBaseAbilitySystemComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBaseAbilitySystemComponent), 2221700285U) },
+		{ Z_Construct_UClass_UBaseAbilitySystemComponent, UBaseAbilitySystemComponent::StaticClass, TEXT("UBaseAbilitySystemComponent"), &Z_Registration_Info_UClass_UBaseAbilitySystemComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBaseAbilitySystemComponent), 2827693365U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAbilitySystemComponent_h_1677410673(TEXT("/Script/Arena"),
-	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAbilitySystemComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_AbilitySystem_BaseAbilitySystemComponent_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAbilitySystemComponent_h_282732235(TEXT("/Script/Arena"),
+	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAbilitySystemComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAbilitySystemComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

@@ -1,10 +1,11 @@
-﻿#include "BasePlayerController.h"
+﻿#include "Player/BasePlayerController.h"
+
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "AbilitySystemBlueprintLibrary.h"
-#include "Arena/AbilitySystem/BaseAbilitySystemComponent.h"
-#include "Arena/Character/PlayerCharacter.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "Character/PlayerCharacter.h"
 #include "GameFramework/Pawn.h"
 
 ABasePlayerController::ABasePlayerController()

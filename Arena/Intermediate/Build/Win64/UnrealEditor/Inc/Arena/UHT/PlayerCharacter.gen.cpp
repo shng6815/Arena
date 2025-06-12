@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "Arena/Character/PlayerCharacter.h"
+#include "Arena/Public/Character/PlayerCharacter.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodePlayerCharacter() {}
 
@@ -28,7 +28,7 @@ struct Z_Construct_UFunction_APlayerCharacter_GetMovementDirection_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Animation" },
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
@@ -73,7 +73,7 @@ struct Z_Construct_UFunction_APlayerCharacter_GetMovementSpeed_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// Animation Interface - \xeb\xb8\x94\xeb\xa3\xa8\xed\x94\x84\xeb\xa6\xb0\xed\x8a\xb8\xec\x97\x90\xec\x84\x9c \xec\xa7\x81\xec\xa0\x91 \xed\x98\xb8\xec\xb6\x9c\xed\x95\xa0 \xec\x88\x98 \xec\x9e\x88\xeb\x8a\x94 \xed\x95\xa8\xec\x88\x98\xeb\x93\xa4\n" },
 #endif
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Animation Interface - \xeb\xb8\x94\xeb\xa3\xa8\xed\x94\x84\xeb\xa6\xb0\xed\x8a\xb8\xec\x97\x90\xec\x84\x9c \xec\xa7\x81\xec\xa0\x91 \xed\x98\xb8\xec\xb6\x9c\xed\x95\xa0 \xec\x88\x98 \xec\x9e\x88\xeb\x8a\x94 \xed\x95\xa8\xec\x88\x98\xeb\x93\xa4" },
 #endif
@@ -118,7 +118,7 @@ struct Z_Construct_UFunction_APlayerCharacter_GetSpineRotation_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Look System" },
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
@@ -160,7 +160,7 @@ struct Z_Construct_UFunction_APlayerCharacter_IsMoving_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Animation" },
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 	};
 #endif // WITH_METADATA
 	static void NewProp_ReturnValue_SetBit(void* Obj);
@@ -214,7 +214,7 @@ struct Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_Rotation;
@@ -260,7 +260,7 @@ struct Z_Construct_UFunction_APlayerCharacter_SetSpineRotation_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// Look System Interface\n" },
 #endif
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Look System Interface" },
 #endif
@@ -321,7 +321,7 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
 		{ "HideCategories", "Navigation" },
 		{ "IncludePath", "Character/PlayerCharacter.h" },
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpringArm_MetaData[] = {
 		{ "Category", "Camera" },
@@ -329,7 +329,7 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 		{ "Comment", "// Camera Components\n" },
 #endif
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Camera Components" },
 #endif
@@ -337,7 +337,7 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Camera_MetaData[] = {
 		{ "Category", "Camera" },
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentSpineRotation_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -345,7 +345,7 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "// Look System \xec\x83\x81\xed\x83\x9c\n" },
 #endif
-		{ "ModuleRelativePath", "Character/PlayerCharacter.h" },
+		{ "ModuleRelativePath", "Public/Character/PlayerCharacter.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Look System \xec\x83\x81\xed\x83\x9c" },
 #endif
@@ -357,12 +357,12 @@ struct Z_Construct_UClass_APlayerCharacter_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_APlayerCharacter_GetMovementDirection, "GetMovementDirection" }, // 3626826227
-		{ &Z_Construct_UFunction_APlayerCharacter_GetMovementSpeed, "GetMovementSpeed" }, // 1977512818
-		{ &Z_Construct_UFunction_APlayerCharacter_GetSpineRotation, "GetSpineRotation" }, // 3885843422
-		{ &Z_Construct_UFunction_APlayerCharacter_IsMoving, "IsMoving" }, // 2341767871
-		{ &Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation, "ServerSetSpineRotation" }, // 275439917
-		{ &Z_Construct_UFunction_APlayerCharacter_SetSpineRotation, "SetSpineRotation" }, // 3578193387
+		{ &Z_Construct_UFunction_APlayerCharacter_GetMovementDirection, "GetMovementDirection" }, // 3973784308
+		{ &Z_Construct_UFunction_APlayerCharacter_GetMovementSpeed, "GetMovementSpeed" }, // 4254904995
+		{ &Z_Construct_UFunction_APlayerCharacter_GetSpineRotation, "GetSpineRotation" }, // 2041836336
+		{ &Z_Construct_UFunction_APlayerCharacter_IsMoving, "IsMoving" }, // 790048553
+		{ &Z_Construct_UFunction_APlayerCharacter_ServerSetSpineRotation, "ServerSetSpineRotation" }, // 945556918
+		{ &Z_Construct_UFunction_APlayerCharacter_SetSpineRotation, "SetSpineRotation" }, // 2544937317
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -423,14 +423,14 @@ APlayerCharacter::~APlayerCharacter() {}
 // End Class APlayerCharacter
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APlayerCharacter, APlayerCharacter::StaticClass, TEXT("APlayerCharacter"), &Z_Registration_Info_UClass_APlayerCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerCharacter), 3889364102U) },
+		{ Z_Construct_UClass_APlayerCharacter, APlayerCharacter::StaticClass, TEXT("APlayerCharacter"), &Z_Registration_Info_UClass_APlayerCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerCharacter), 2798177552U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_2586676173(TEXT("/Script/Arena"),
-	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Character_PlayerCharacter_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_3516087002(TEXT("/Script/Arena"),
+	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration
