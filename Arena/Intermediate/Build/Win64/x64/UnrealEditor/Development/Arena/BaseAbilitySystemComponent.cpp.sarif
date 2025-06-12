@@ -10,13 +10,13 @@
                         "text": "'FGameplayAbilitySpec::DynamicAbilityTags': Use GetDynamicSpecSourceTags() which better represents what this variable does Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 22,
@@ -32,13 +32,13 @@
                         "text": "'FGameplayAbilitySpec::DynamicAbilityTags': Use GetDynamicSpecSourceTags() which better represents what this variable does Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 42,
@@ -54,13 +54,13 @@
                         "text": "'FGameplayAbilitySpec::ActivationInfo': ActivationInfo on the Spec only applies to NonInstanced abilities (which are now deprecated; instanced abilities have their own per-instance CurrentActivationInfo) Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 49,
@@ -76,13 +76,13 @@
                         "text": "'FGameplayAbilitySpec::DynamicAbilityTags': Use GetDynamicSpecSourceTags() which better represents what this variable does Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 62,
@@ -98,13 +98,13 @@
                         "text": "'FGameplayAbilitySpec::DynamicAbilityTags': Use GetDynamicSpecSourceTags() which better represents what this variable does Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 80,
@@ -120,13 +120,13 @@
                         "text": "'FGameplayAbilitySpec::ActivationInfo': ActivationInfo on the Spec only applies to NonInstanced abilities (which are now deprecated; instanced abilities have their own per-instance CurrentActivationInfo) Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 85,
@@ -142,13 +142,13 @@
                         "text": "'UGameplayAbility::AbilityTags': Use GetAssetTags(). This is being made non-mutable, private and renamed to AssetTags in the future. Use SetAssetTags to set defaults (in constructor only). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 94,
@@ -164,13 +164,13 @@
                         "text": "'FGameplayAbilitySpec::DynamicAbilityTags': Use GetDynamicSpecSourceTags() which better represents what this variable does Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/BaseAbilitySystemComponent.cpp"
                                 },
                                 "region": {
                                     "startLine": 107,
