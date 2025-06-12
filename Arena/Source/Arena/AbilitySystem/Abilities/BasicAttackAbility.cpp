@@ -2,6 +2,7 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/BaseAttributeSet.h"
+#include "Character/PlayerCharacter.h"
 #include "GameFramework/Character.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Engine/World.h"
@@ -11,10 +12,6 @@ UBasicAttackAbility::UBasicAttackAbility()
 	// 어빌리티 기본 설정
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
-
-	// 일단 하드코딩으로 태그 설정 (나중에 리팩토링)
-	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Attack.Basic")));
-	StartupInputTag = FGameplayTag::RequestGameplayTag(FName("InputTag.LMB"));
 }
 
 void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -27,6 +24,8 @@ void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 	// 연속 공격 시작
 	bIsAttacking = true;
 	PerformAttack(); // 첫 번째 공격 즉시 실행
+
+	UE_LOG(LogTemp, Warning, TEXT("Active Ability"));
 
 	// 타이머로 연속 공격 설정
 	if (AttackRate > 0.0f)
@@ -80,10 +79,17 @@ void UBasicAttackAbility::PerformAttack()
 		return;
 	}
 
+	// 캐릭터가 바라보는 방향으로 공격! (Look System 기반)
+	FVector AttackDirection = GetAttackDirection(Character);
+	if (AttackDirection.IsNearlyZero())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Attack direction is zero, using forward vector"));
+		AttackDirection = Character->GetActorForwardVector();
+	}
+
 	// 공격 범위 설정
 	FVector StartLocation = Character->GetActorLocation();
-	FVector ForwardVector = Character->GetActorForwardVector();
-	FVector EndLocation = StartLocation + ForwardVector * AttackRange;
+	FVector EndLocation = StartLocation + AttackDirection * AttackRange;
 
 	// 구체 트레이스로 적 탐지
 	TArray<FHitResult> HitResults;
@@ -98,9 +104,12 @@ void UBasicAttackAbility::PerformAttack()
 		UEngineTypes::ConvertToTraceType(ECC_Pawn),
 		false,
 		ActorsToIgnore,
-		EDrawDebugTrace::ForOneFrame, // 디버그용으로 일단 표시
+		EDrawDebugTrace::ForDuration, // 디버그용으로 일단 표시
 		HitResults,
-		true
+		true,
+		FLinearColor::Red,
+		FLinearColor::Green,
+		3.0f
 	);
 
 	// 맞은 대상 처리
@@ -120,5 +129,24 @@ void UBasicAttackAbility::PerformAttack()
 	}
 
 	// 공격 애니메이션/이펙트는 나중에 추가
-	UE_LOG(LogTemp, Log, TEXT("Performing Attack!"));
+	UE_LOG(LogTemp, Log, TEXT("Performing Attack in direction: %s"), *AttackDirection.ToString());
+
+}
+
+FVector UBasicAttackAbility::GetAttackDirection(ACharacter* Character)
+{
+	if (APlayerCharacter* PlayerChar = Cast<APlayerCharacter>(Character))
+	{
+		// 캐릭터가 실제로 바라보는 방향 (몸체 + 척추)
+		float SpineRotation = PlayerChar->GetSpineRotation();
+		float BodyYaw = Character->GetActorRotation().Yaw;
+		float TotalYaw = BodyYaw + SpineRotation;
+        
+		return FVector(FMath::Cos(FMath::DegreesToRadians(TotalYaw)), 
+					  FMath::Sin(FMath::DegreesToRadians(TotalYaw)), 
+					  0.0f);
+	}
+    
+	// AI나 다른 캐릭터는 Forward 사용
+	return Character->GetActorForwardVector();
 }

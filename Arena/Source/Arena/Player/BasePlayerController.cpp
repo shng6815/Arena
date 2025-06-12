@@ -64,6 +64,7 @@ void ABasePlayerController::SetupInputComponent()
 		if (AttackAction)
 		{
 			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this, &ABasePlayerController::AttackStarted);
+			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &ABasePlayerController::AttackHeld);
 			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Completed, this, &ABasePlayerController::AttackCompleted);
 		}
 	}
@@ -83,13 +84,19 @@ void ABasePlayerController::Move(const FInputActionValue& Value)
 
 void ABasePlayerController::AttackStarted(const FInputActionValue& Value)
 {
-	// 마우스 버튼 눌렀을 때 - 하드코딩 태그
+	// 마우스 버튼 처음 눌렀을 때 - Pressed만 호출
 	AbilityInputTagPressed(FGameplayTag::RequestGameplayTag(FName("InputTag.LMB")));
+}
+
+void ABasePlayerController::AttackHeld(const FInputActionValue& Value)
+{
+	// 마우스 버튼 누르고 있는 동안 - Held 호출 (연속 공격!)
+	AbilityInputTagHeld(FGameplayTag::RequestGameplayTag(FName("InputTag.LMB")));
 }
 
 void ABasePlayerController::AttackCompleted(const FInputActionValue& Value)
 {
-	// 마우스 버튼 뺐을 때 - 하드코딩 태그
+	// 마우스 버튼 뗐을 때 - Released 호출
 	AbilityInputTagReleased(FGameplayTag::RequestGameplayTag(FName("InputTag.LMB")));
 }
 

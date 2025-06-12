@@ -1,6 +1,7 @@
 // BaseCharacter.cpp
 #include "BaseCharacter.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
 #include "Arena/AbilitySystem/BaseAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Net/UnrealNetwork.h"
@@ -143,17 +144,32 @@ void ABaseCharacter::InitializeDefaultAttributes() const
 
 void ABaseCharacter::AddCharacterAbilities()
 {
-	if (!HasAuthority()) return;
-	if (!AbilitySystemComponent) return;
-
-	for (const TSubclassOf<UGameplayAbility>& AbilityClass : StartupAbilities)
+	if (!HasAuthority()) 
 	{
-		if (AbilityClass)
-		{
-			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
-			AbilitySystemComponent->GiveAbility(AbilitySpec);
-		}
+		UE_LOG(LogTemp, Warning, TEXT("AddCharacterAbilities: No Authority!"));
+		return;
 	}
+    
+	if (!AbilitySystemComponent) 
+	{
+		UE_LOG(LogTemp, Error, TEXT("AddCharacterAbilities: No ASC!"));
+		return;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("AddCharacterAbilities: StartupAbilities count = %d"), StartupAbilities.Num());
+
+	// AURA 방식: ASC에서만 처리하게 하기!
+	if (UBaseAbilitySystemComponent* BaseASC = Cast<UBaseAbilitySystemComponent>(AbilitySystemComponent))
+	{
+		BaseASC->AddCharacterAbilities(StartupAbilities);
+		UE_LOG(LogTemp, Warning, TEXT("Called BaseASC->AddCharacterAbilities"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to cast to BaseAbilitySystemComponent!"));
+	}
+    
+	// 기존 for loop 코드는 제거!
 }
 
 void ABaseCharacter::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const

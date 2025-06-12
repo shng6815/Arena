@@ -12,23 +12,30 @@ void UBaseAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf
 	for (const TSubclassOf<UGameplayAbility> AbilityClass : StartupAbilities)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
-		
+        
 		if (const UBaseGameplayAbility* BaseAbility = Cast<UBaseGameplayAbility>(AbilitySpec.Ability))
 		{
-			AbilitySpec.DynamicAbilityTags.AddTag(BaseAbility->StartupInputTag);
+			UE_LOG(LogTemp, Warning, TEXT("StartupInputTag: %s"), *BaseAbility->StartupInputTag.ToString());
+            
+			if (BaseAbility->StartupInputTag.IsValid())
+			{
+				AbilitySpec.DynamicAbilityTags.AddTag(BaseAbility->StartupInputTag);
+				UE_LOG(LogTemp, Warning, TEXT("Added InputTag to DynamicAbilityTags"));
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("StartupInputTag is INVALID!"));
+			}
 		}
-		
+        
 		GiveAbility(AbilitySpec);
 	}
-	
-	bStartupAbilitiesGiven = true;
-	AbilitiesGivenDelegate.Broadcast();
 }
 
 void UBaseAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& InputTag)
 {
 	if (!InputTag.IsValid()) return;
-
+	
 	FScopedAbilityListLock ActiveScopeLoc(*this);
 	for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 	{

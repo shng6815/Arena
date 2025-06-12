@@ -50,6 +50,7 @@ protected:
 	void Move(const FInputActionValue& Value);
 
 	void AttackStarted(const FInputActionValue& Value);
+	void AttackHeld(const FInputActionValue& Value);
 	void AttackCompleted(const FInputActionValue& Value);
 
 	// Look System Settings

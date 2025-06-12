@@ -47,4 +47,6 @@ protected:
 private:
 	FTimerHandle AttackTimerHandle;
 	bool bIsAttacking = false;
+
+	FVector GetAttackDirection(ACharacter* Character);
 };
