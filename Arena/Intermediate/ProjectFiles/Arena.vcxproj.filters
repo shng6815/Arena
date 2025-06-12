@@ -26,6 +26,9 @@
     <None Include="..\..\Config\DefaultGame.ini">
       <Filter>Config</Filter>
     </None>
+    <None Include="..\..\Config\DefaultGameplayTags.ini">
+      <Filter>Config</Filter>
+    </None>
     <None Include="..\..\Config\DefaultInput.ini">
       <Filter>Config</Filter>
     </None>
@@ -53,59 +56,107 @@
     <ClCompile Include="..\..\Source\Arena\ArenaGameMode.h">
       <Filter>Source\Arena</Filter>
     </ClCompile>
-    <Filter Include="Source\Arena\AbilitySystem">
-      <UniqueIdentifier>{547610E0-D117-3589-970F-5A00624E09C1}</UniqueIdentifier>
+    <Filter Include="Source\Arena\Private">
+      <UniqueIdentifier>{9F76C160-F532-3157-BF04-BFD3A41D363B}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAbilitySystemComponent.cpp">
-      <Filter>Source\Arena\AbilitySystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAbilitySystemComponent.h">
-      <Filter>Source\Arena\AbilitySystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAttributeSet.cpp">
-      <Filter>Source\Arena\AbilitySystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\AbilitySystem\BaseAttributeSet.h">
-      <Filter>Source\Arena\AbilitySystem</Filter>
-    </ClCompile>
-    <Filter Include="Source\Arena\AbilitySystem\Abilities">
-      <UniqueIdentifier>{51622AFA-3CC3-3AC0-AD2D-F8DD57434234}</UniqueIdentifier>
+    <Filter Include="Source\Arena\Private\AbilitySystem">
+      <UniqueIdentifier>{698B5F3E-5E5D-33FE-9345-7E3F983DF154}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\Arena\AbilitySystem\Abilities\BaseGameplayAbility.cpp">
-      <Filter>Source\Arena\AbilitySystem\Abilities</Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\AbilitySystem\BaseAbilitySystemComponent.cpp">
+      <Filter>Source\Arena\Private\AbilitySystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\AbilitySystem\Abilities\BaseGameplayAbility.h">
-      <Filter>Source\Arena\AbilitySystem\Abilities</Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\AbilitySystem\BaseAttributeSet.cpp">
+      <Filter>Source\Arena\Private\AbilitySystem</Filter>
     </ClCompile>
-    <Filter Include="Source\Arena\Character">
-      <UniqueIdentifier>{D3DB8938-A912-3D1E-ABEF-30F95E6718FA}</UniqueIdentifier>
+    <Filter Include="Source\Arena\Private\AbilitySystem\Abilities">
+      <UniqueIdentifier>{D97D47E9-1025-3EDB-A1C6-C1B39596CDFC}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\Arena\Character\BaseCharacter.cpp">
-      <Filter>Source\Arena\Character</Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\AbilitySystem\Abilities\BaseGameplayAbility.cpp">
+      <Filter>Source\Arena\Private\AbilitySystem\Abilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\Character\BaseCharacter.h">
-      <Filter>Source\Arena\Character</Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\AbilitySystem\Abilities\BasicAttackAbility.cpp">
+      <Filter>Source\Arena\Private\AbilitySystem\Abilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\Character\PlayerCharacter.cpp">
-      <Filter>Source\Arena\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\Character\PlayerCharacter.h">
-      <Filter>Source\Arena\Character</Filter>
-    </ClCompile>
-    <Filter Include="Source\Arena\Player">
-      <UniqueIdentifier>{8E4D4FF3-70F3-35D1-B074-F9A8D8A4855E}</UniqueIdentifier>
+    <Filter Include="Source\Arena\Private\AbilitySystem\AbilityTasks">
+      <UniqueIdentifier>{02C0DA46-F18E-308A-8D22-C4FEE5EE995E}</UniqueIdentifier>
     </Filter>
-    <ClCompile Include="..\..\Source\Arena\Player\BasePlayerController.cpp">
-      <Filter>Source\Arena\Player</Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\AbilitySystem\AbilityTasks\TargetDataUnderMouse.cpp">
+      <Filter>Source\Arena\Private\AbilitySystem\AbilityTasks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\Player\BasePlayerController.h">
-      <Filter>Source\Arena\Player</Filter>
+    <Filter Include="Source\Arena\Private\Actor">
+      <UniqueIdentifier>{20DCE2A4-0AA4-3225-802F-938961CE7170}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\Actor\SimpleBullet.cpp">
+      <Filter>Source\Arena\Private\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\Player\BasePlayerState.cpp">
-      <Filter>Source\Arena\Player</Filter>
+    <Filter Include="Source\Arena\Private\Character">
+      <UniqueIdentifier>{4334A417-2312-37D8-BF13-897885C02D5C}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\Character\BaseCharacter.cpp">
+      <Filter>Source\Arena\Private\Character</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Arena\Player\BasePlayerState.h">
-      <Filter>Source\Arena\Player</Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\Character\PlayerCharacter.cpp">
+      <Filter>Source\Arena\Private\Character</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\Private\Player">
+      <UniqueIdentifier>{78670067-5681-3C08-9ED7-D8F28BEA55A0}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Private\Player\BasePlayerController.cpp">
+      <Filter>Source\Arena\Private\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\Private\Player\BasePlayerState.cpp">
+      <Filter>Source\Arena\Private\Player</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\Public">
+      <UniqueIdentifier>{39B176E9-D215-38DF-AC0D-B6C84DCA9120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Arena\Public\AbilitySystem">
+      <UniqueIdentifier>{44C3BD9E-1181-3280-AB5B-8B39F452F31C}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Public\AbilitySystem\BaseAbilitySystemComponent.h">
+      <Filter>Source\Arena\Public\AbilitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\Public\AbilitySystem\BaseAttributeSet.h">
+      <Filter>Source\Arena\Public\AbilitySystem</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\Public\AbilitySystem\Abilities">
+      <UniqueIdentifier>{A2EE9D78-D0CE-3E06-9691-488CBC2CD57E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Public\AbilitySystem\Abilities\BaseGameplayAbility.h">
+      <Filter>Source\Arena\Public\AbilitySystem\Abilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\Public\AbilitySystem\Abilities\BasicAttackAbility.h">
+      <Filter>Source\Arena\Public\AbilitySystem\Abilities</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\Public\AbilitySystem\AbilityTasks">
+      <UniqueIdentifier>{FEA820AC-DD33-3225-9C1E-30F22C7D0DDD}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Public\AbilitySystem\AbilityTasks\TargetDataUnderMouse.h">
+      <Filter>Source\Arena\Public\AbilitySystem\AbilityTasks</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\Public\Actor">
+      <UniqueIdentifier>{1E3F60D7-4B60-34D7-83F8-B8476A89C43D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Public\Actor\SimpleBullet.h">
+      <Filter>Source\Arena\Public\Actor</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\Public\Character">
+      <UniqueIdentifier>{25C3E2DD-0362-3FB4-93F7-87C289A360C7}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Public\Character\BaseCharacter.h">
+      <Filter>Source\Arena\Public\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\Public\Character\PlayerCharacter.h">
+      <Filter>Source\Arena\Public\Character</Filter>
+    </ClCompile>
+    <Filter Include="Source\Arena\Public\Player">
+      <UniqueIdentifier>{D4E3FF7D-25F8-3A71-BA8E-3D27D1998113}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Arena\Public\Player\BasePlayerController.h">
+      <Filter>Source\Arena\Public\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Arena\Public\Player\BasePlayerState.h">
+      <Filter>Source\Arena\Public\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
