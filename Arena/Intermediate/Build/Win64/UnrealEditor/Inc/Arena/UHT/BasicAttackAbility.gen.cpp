@@ -15,6 +15,7 @@ ARENA_API UClass* Z_Construct_UClass_ASimpleBullet_NoRegister();
 ARENA_API UClass* Z_Construct_UClass_UBaseGameplayAbility();
 ARENA_API UClass* Z_Construct_UClass_UBasicAttackAbility();
 ARENA_API UClass* Z_Construct_UClass_UBasicAttackAbility_NoRegister();
+ARENA_API UClass* Z_Construct_UClass_UTargetDataUnderMouse_NoRegister();
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 GAMEPLAYABILITIES_API UScriptStruct* Z_Construct_UScriptStruct_FGameplayAbilityTargetDataHandle();
 UPackage* Z_Construct_UPackage__Script_Arena();
@@ -30,11 +31,11 @@ struct Z_Construct_UFunction_UBasicAttackAbility_OnTargetDataReady_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// Target Data \xec\xbd\x9c\xeb\xb0\xb1\n" },
+		{ "Comment", "// Target Data \xec\xbd\x9c\xeb\xb0\xb1 - \xeb\xa7\xa4\xeb\xb2\x88 \xec\x83\x88\xeb\xa1\x9c\xec\x9a\xb4 \xec\x9c\x84\xec\xb9\x98\xeb\xa1\x9c \xeb\xb0\x9c\xec\x82\xac!\n" },
 #endif
 		{ "ModuleRelativePath", "Public/AbilitySystem/Abilities/BasicAttackAbility.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Target Data \xec\xbd\x9c\xeb\xb0\xb1" },
+		{ "ToolTip", "Target Data \xec\xbd\x9c\xeb\xb0\xb1 - \xeb\xa7\xa4\xeb\xb2\x88 \xec\x83\x88\xeb\xa1\x9c\xec\x9a\xb4 \xec\x9c\x84\xec\xb9\x98\xeb\xa1\x9c \xeb\xb0\x9c\xec\x82\xac!" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TargetDataHandle_MetaData[] = {
@@ -100,13 +101,23 @@ struct Z_Construct_UClass_UBasicAttackAbility_Statics
 		{ "Category", "Attack" },
 		{ "ModuleRelativePath", "Public/AbilitySystem/Abilities/BasicAttackAbility.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentTargetDataTask_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// \xed\x98\x84\xec\x9e\xac \xed\x99\x9c\xec\x84\xb1\xed\x99\x94\xeb\x90\x9c TargetDataTask (\xec\xa0\x95\xeb\xa6\xac\xec\x9a\xa9)\n" },
+#endif
+		{ "ModuleRelativePath", "Public/AbilitySystem/Abilities/BasicAttackAbility.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "\xed\x98\x84\xec\x9e\xac \xed\x99\x9c\xec\x84\xb1\xed\x99\x94\xeb\x90\x9c TargetDataTask (\xec\xa0\x95\xeb\xa6\xac\xec\x9a\xa9)" },
+#endif
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FClassPropertyParams NewProp_BulletClass;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_AttackRate;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentTargetDataTask;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UBasicAttackAbility_OnTargetDataReady, "OnTargetDataReady" }, // 1799252306
+		{ &Z_Construct_UFunction_UBasicAttackAbility_OnTargetDataReady, "OnTargetDataReady" }, // 2823275774
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -116,9 +127,11 @@ struct Z_Construct_UClass_UBasicAttackAbility_Statics
 };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UBasicAttackAbility_Statics::NewProp_BulletClass = { "BulletClass", nullptr, (EPropertyFlags)0x0024080000010015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UBasicAttackAbility, BulletClass), Z_Construct_UClass_UClass, Z_Construct_UClass_ASimpleBullet_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BulletClass_MetaData), NewProp_BulletClass_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UBasicAttackAbility_Statics::NewProp_AttackRate = { "AttackRate", nullptr, (EPropertyFlags)0x0020080000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UBasicAttackAbility, AttackRate), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AttackRate_MetaData), NewProp_AttackRate_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UBasicAttackAbility_Statics::NewProp_CurrentTargetDataTask = { "CurrentTargetDataTask", nullptr, (EPropertyFlags)0x0144000000000000, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UBasicAttackAbility, CurrentTargetDataTask), Z_Construct_UClass_UTargetDataUnderMouse_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentTargetDataTask_MetaData), NewProp_CurrentTargetDataTask_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UBasicAttackAbility_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBasicAttackAbility_Statics::NewProp_BulletClass,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBasicAttackAbility_Statics::NewProp_AttackRate,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBasicAttackAbility_Statics::NewProp_CurrentTargetDataTask,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UBasicAttackAbility_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UBasicAttackAbility_Statics::DependentSingletons[])() = {
@@ -161,10 +174,10 @@ UBasicAttackAbility::~UBasicAttackAbility() {}
 struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_Abilities_BasicAttackAbility_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UBasicAttackAbility, UBasicAttackAbility::StaticClass, TEXT("UBasicAttackAbility"), &Z_Registration_Info_UClass_UBasicAttackAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBasicAttackAbility), 1440659698U) },
+		{ Z_Construct_UClass_UBasicAttackAbility, UBasicAttackAbility::StaticClass, TEXT("UBasicAttackAbility"), &Z_Registration_Info_UClass_UBasicAttackAbility, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBasicAttackAbility), 1508838423U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_Abilities_BasicAttackAbility_h_899225904(TEXT("/Script/Arena"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_Abilities_BasicAttackAbility_h_1142765805(TEXT("/Script/Arena"),
 	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_Abilities_BasicAttackAbility_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_Abilities_BasicAttackAbility_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

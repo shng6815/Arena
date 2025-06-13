@@ -31,12 +31,15 @@ protected:
 							  const FGameplayAbilityActorInfo* ActorInfo, 
 							  const FGameplayAbilityActivationInfo ActivationInfo) override;
 
-	// Target Data 콜백
+	// Target Data 콜백 - 매번 새로운 위치로 발사!
 	UFUNCTION()
 	void OnTargetDataReady(const FGameplayAbilityTargetDataHandle& TargetDataHandle);
 
 	// 총알 발사
 	void FireBulletAtTarget(const FVector& TargetLocation);
+
+	// 연속 공격용 - 새로운 TargetData 요청
+	void RequestNextAttack();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	TSubclassOf<ASimpleBullet> BulletClass;
@@ -47,7 +50,10 @@ protected:
 private:
 	FTimerHandle AttackTimerHandle;
 	bool bIsAttacking = false;
-	FVector CachedTargetLocation; // 연속 공격용 타겟 위치 캐싱
+	
+	// 현재 활성화된 TargetDataTask (정리용)
+	UPROPERTY()
+	TObjectPtr<UTargetDataUnderMouse> CurrentTargetDataTask;
 
 	FVector GetMuzzleLocation(ACharacter* Character);
 };

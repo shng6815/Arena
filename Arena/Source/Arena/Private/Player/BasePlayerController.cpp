@@ -1,13 +1,13 @@
 ﻿#include "Player/BasePlayerController.h"
 
 #include "EnhancedInputSubsystems.h"
-#include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "ArenaGameplayTags.h"
 #include "AbilitySystem/BaseAbilitySystemComponent.h"
 #include "Character/PlayerCharacter.h"
-#include "GameFramework/Pawn.h"
+#include "Input/ArenaInputComponent.h"
+#include "Input/ArenaInputConfig.h"
 
 ABasePlayerController::ABasePlayerController()
 {
@@ -35,6 +35,29 @@ void ABasePlayerController::BeginPlay()
 	SetInputMode(InputModeData);
 }
 
+void ABasePlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	UArenaInputComponent* ArenaInputComponent = CastChecked<UArenaInputComponent>(InputComponent);
+
+	// 기본 이동 입력
+	if (MoveAction) {
+		ArenaInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABasePlayerController::Move);
+	}
+
+	// 태그 기반 어빌리티 입력 바인딩! (AURA 방식)
+	if (InputConfig) {
+		ArenaInputComponent->BindAbilityActions(InputConfig, this,
+		                                        &ThisClass::AbilityInputTagPressed,
+		                                        &ThisClass::AbilityInputTagReleased,
+		                                        &ThisClass::AbilityInputTagHeld);
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT("InputConfig is not set in BasePlayerController!"));
+	}
+}
+
 void ABasePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
@@ -48,29 +71,6 @@ void ABasePlayerController::PlayerTick(float DeltaTime)
 	}
 }
 
-void ABasePlayerController::SetupInputComponent()
-{
-	Super::SetupInputComponent();
-
-	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent)) {
-		// Move
-		if (MoveAction) {
-			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this,
-			                                   &ABasePlayerController::Move);
-		}
-
-		// Attack
-		if (AttackAction) {
-			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this,
-			                                   &ABasePlayerController::AttackStarted);
-			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this,
-			                                   &ABasePlayerController::AttackHeld);
-			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Completed, this,
-			                                   &ABasePlayerController::AttackCompleted);
-		}
-	}
-}
-
 void ABasePlayerController::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -80,24 +80,6 @@ void ABasePlayerController::Move(const FInputActionValue& Value)
 		ControlledPawn->AddMovementInput(FVector::ForwardVector, MovementVector.Y);
 		ControlledPawn->AddMovementInput(FVector::RightVector, MovementVector.X);
 	}
-}
-
-void ABasePlayerController::AttackStarted(const FInputActionValue& Value)
-{
-	// 마우스 버튼 처음 눌렀을 때 - Pressed만 호출
-	AbilityInputTagPressed(FArenaGameplayTags::Get().InputTag_LMB);
-}
-
-void ABasePlayerController::AttackHeld(const FInputActionValue& Value)
-{
-	// 마우스 버튼 누르고 있는 동안 - Held 호출 (연속 공격!)
-	AbilityInputTagHeld(FArenaGameplayTags::Get().InputTag_LMB);
-}
-
-void ABasePlayerController::AttackCompleted(const FInputActionValue& Value)
-{
-	// 마우스 버튼 뗐을 때 - Released 호출
-	AbilityInputTagReleased(FArenaGameplayTags::Get().InputTag_LMB);
 }
 
 void ABasePlayerController::AbilityInputTagPressed(FGameplayTag InputTag)

@@ -1,0 +1,41 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.Arena.cpp.obj": [
+			"ArenaCharacter.gen.cpp.obj",
+			"ArenaGameMode.gen.cpp.obj",
+			"ArenaInputComponent.gen.cpp.obj",
+			"ArenaInputConfig.gen.cpp.obj",
+			"BaseAbilitySystemComponent.gen.cpp.obj",
+			"BaseAttributeSet.gen.cpp.obj",
+			"BaseCharacter.gen.cpp.obj",
+			"BaseGameplayAbility.gen.cpp.obj",
+			"BasePlayerController.gen.cpp.obj",
+			"BasePlayerState.gen.cpp.obj",
+			"PlayerCharacter.gen.cpp.obj",
+			"SimpleBullet.gen.cpp.obj",
+			"TargetDataUnderMouse.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj",
+			"Arena.cpp.obj",
+			"ArenaCharacter.cpp.obj",
+			"ArenaGameMode.cpp.obj",
+			"BaseGameplayAbility.cpp.obj",
+			"TargetDataUnderMouse.cpp.obj",
+			"BaseAbilitySystemComponent.cpp.obj",
+			"BaseAttributeSet.cpp.obj",
+			"SimpleBullet.cpp.obj",
+			"ArenaAssetManager.cpp.obj",
+			"ArenaGameplayTags.cpp.obj",
+			"BaseCharacter.cpp.obj",
+			"PlayerCharacter.cpp.obj",
+			"BasePlayerState.cpp.obj",
+			"Arena.init.gen.cpp.obj",
+			"ArenaAssetManager.gen.cpp.obj",
+			"BasicAttackAbility.gen.cpp.obj",
+			"BasicAttackAbility.cpp.obj",
+			"ArenaInputComponent.cpp.obj",
+			"ArenaInputConfig.cpp.obj",
+			"BasePlayerController.cpp.obj"
+		]
+	}
+}

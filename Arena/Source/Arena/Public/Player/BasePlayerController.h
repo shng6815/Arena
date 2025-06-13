@@ -1,5 +1,7 @@
-﻿#pragma once
+﻿
+#pragma once
 
+#include "Input/ArenaInputComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "GameplayTagContainer.h"
@@ -9,6 +11,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class UBaseAbilitySystemComponent;
+class UArenaInputConfig;
 
 UCLASS()
 class ARENA_API ABasePlayerController : public APlayerController
@@ -26,11 +29,6 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Cursor")
 	bool GetCursorHitResult() const { return CursorHit.bBlockingHit; }
 
-	// 어빌리티 입력 처리
-	void AbilityInputTagPressed(FGameplayTag InputTag);
-	void AbilityInputTagReleased(FGameplayTag InputTag);
-	void AbilityInputTagHeld(FGameplayTag InputTag);
-
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -39,35 +37,37 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
-	// Input Actions
+	// Input Config (태그 기반!)
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	TObjectPtr<UArenaInputConfig> InputConfig;
+
+	// Basic Movement Actions
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> AttackAction; // 좌클릭 공격
+	// 태그 기반 어빌리티 입력 핸들러
+	void AbilityInputTagPressed(FGameplayTag InputTag);
+	void AbilityInputTagReleased(FGameplayTag InputTag);
+	void AbilityInputTagHeld(FGameplayTag InputTag);
 
-	// Input Functions
+	// Basic Input Functions
 	void Move(const FInputActionValue& Value);
-
-	void AttackStarted(const FInputActionValue& Value);
-	void AttackHeld(const FInputActionValue& Value);
-	void AttackCompleted(const FInputActionValue& Value);
 
 	// Look System Settings
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
 	bool bEnableLookSystem = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
-	float MinLookDistance = 50.0f; // 최소 Look 거리
+	float MinLookDistance = 50.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
-	float MaxSpineRotation = 45.0f; // 최대 척추 회전각
+	float MaxSpineRotation = 45.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
-	float SpineRotationSpeed = 5.0f; // 척추 회전 속도
+	float SpineRotationSpeed = 5.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Look System")
-	float BodyRotationSpeed = 3.0f; // 몸체 회전 속도
+	float BodyRotationSpeed = 3.0f;
 
 	// Ability System
 	UPROPERTY()
@@ -81,7 +81,7 @@ private:
 	void CursorTrace();
 
 	// Look System
-	float CurrentSpineRotation = 0.0f; // 현재 척추 회전각
+	float CurrentSpineRotation = 0.0f;
 	void UpdateLookSystem(float DeltaTime);
 	FVector GetMouseWorldPosition() const;
 
