@@ -1,4 +1,6 @@
 ﻿#include "AbilitySystem/Abilities/BasicAttackAbility.h"
+
+#include "ArenaGameplayTags.h"
 #include "AbilitySystem/AbilityTasks/TargetDataUnderMouse.h"
 #include "Actor/SimpleBullet.h"
 #include "GameFramework/Character.h"
@@ -8,6 +10,9 @@ UBasicAttackAbility::UBasicAttackAbility()
 {
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::ServerInitiated; // 다시 ServerInitiated!
+
+	StartupInputTag = FArenaGameplayTags::Get().InputTag_LMB;
+	AbilityTags.AddTag(FArenaGameplayTags::Get().Abilities_Attack_Basic);
 }
 
 void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -19,7 +24,6 @@ void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 
 	bIsAttacking = true;
 
-	// AURA 스타일 Target Data Task 생성
 	UTargetDataUnderMouse* TargetDataTask = UTargetDataUnderMouse::CreateTargetDataUnderMouse(this);
 	TargetDataTask->ValidData.AddDynamic(this, &UBasicAttackAbility::OnTargetDataReady);
 	TargetDataTask->ReadyForActivation();
@@ -31,20 +35,16 @@ void UBasicAttackAbility::OnTargetDataReady(const FGameplayAbilityTargetDataHand
 {
 	UE_LOG(LogTemp, Warning, TEXT("Target Data Ready!"));
 
-	if (TargetDataHandle.Num() > 0)
-	{
+	if (TargetDataHandle.Num() > 0) {
 		// 클라이언트에서 보낸 커서 위치 받기
 		const FHitResult* HitResult = TargetDataHandle.Get(0)->GetHitResult();
-		if (HitResult && HitResult->bBlockingHit)
-		{
+		if (HitResult && HitResult->bBlockingHit) {
 			CachedTargetLocation = HitResult->ImpactPoint;
 		}
-		else
-		{
+		else {
 			// 히트가 없으면 캐릭터 앞쪽으로 기본 설정
 			ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-			if (Character)
-			{
+			if (Character) {
 				CachedTargetLocation = Character->GetActorLocation() + Character->GetActorForwardVector() * 1000.0f;
 			}
 		}
@@ -53,13 +53,14 @@ void UBasicAttackAbility::OnTargetDataReady(const FGameplayAbilityTargetDataHand
 		FireBulletAtTarget(CachedTargetLocation);
 
 		// 연속 공격 타이머 설정
-		if (AttackRate > 0.0f && bIsAttacking)
-		{
+		if (AttackRate > 0.0f && bIsAttacking) {
 			float AttackInterval = 1.0f / AttackRate;
 			GetWorld()->GetTimerManager().SetTimer(AttackTimerHandle,
-			                                       [this]() { 
-				                                       if (bIsAttacking) 
-					                                       FireBulletAtTarget(CachedTargetLocation); 
+			                                       [this]()
+			                                       {
+				                                       if (bIsAttacking) {
+					                                       FireBulletAtTarget(CachedTargetLocation);
+				                                       }
 			                                       },
 			                                       AttackInterval,
 			                                       true);
@@ -75,8 +76,7 @@ void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
 {
 	bIsAttacking = false;
 
-	if (HasAuthority(&ActivationInfo) && AttackTimerHandle.IsValid())
-	{
+	if (HasAuthority(&ActivationInfo) && AttackTimerHandle.IsValid()) {
 		GetWorld()->GetTimerManager().ClearTimer(AttackTimerHandle);
 		UE_LOG(LogTemp, Warning, TEXT("BasicAttack Ended"));
 	}
@@ -93,10 +93,14 @@ void UBasicAttackAbility::InputReleased(const FGameplayAbilitySpecHandle Handle,
 
 void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 {
-	if (!BulletClass) return;
+	if (!BulletClass) {
+		return;
+	}
 
 	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-	if (!Character) return;
+	if (!Character) {
+		return;
+	}
 
 	// 머즐 위치에서 타겟 위치로의 방향 계산
 	FVector MuzzleLocation = GetMuzzleLocation(Character);
@@ -111,8 +115,7 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 	ASimpleBullet* Bullet = GetWorld()->SpawnActor<ASimpleBullet>(
 		BulletClass, SpawnTransform, FActorSpawnParameters());
 
-	if (Bullet)
-	{
+	if (Bullet) {
 		Bullet->SetOwner(GetAvatarActorFromActorInfo());
 		UE_LOG(LogTemp, Log, TEXT("Bullet fired at target location!"));
 	}
@@ -120,11 +123,13 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 
 FVector UBasicAttackAbility::GetMuzzleLocation(ACharacter* Character)
 {
-	if (!Character) return FVector::ZeroVector;
-	
+	if (!Character) {
+		return FVector::ZeroVector;
+	}
+
 	FVector CharacterLocation = Character->GetActorLocation();
 	FVector ForwardOffset = Character->GetActorForwardVector() * 100.0f;
 	FVector HeightOffset = FVector(0, 0, 50.0f);
-	
+
 	return CharacterLocation + ForwardOffset + HeightOffset;
 }
