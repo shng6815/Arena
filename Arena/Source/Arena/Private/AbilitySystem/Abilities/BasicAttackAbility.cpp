@@ -9,7 +9,7 @@
 UBasicAttackAbility::UBasicAttackAbility()
 {
 	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
-	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::ServerInitiated;
+	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
 
 	StartupInputTag = FArenaGameplayTags::Get().InputTag_LMB;
 	AbilityTags.AddTag(FArenaGameplayTags::Get().Abilities_Attack_Basic);
@@ -26,8 +26,6 @@ void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 
 	// 첫 번째 공격을 위한 TargetData 요청
 	RequestNextAttack();
-
-	UE_LOG(LogTemp, Warning, TEXT("BasicAttack Activated - Continuous TargetData requests"));
 }
 
 void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
@@ -49,8 +47,6 @@ void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
 		CurrentTargetDataTask = nullptr;
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("BasicAttack Ended"));
-
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 
@@ -63,8 +59,6 @@ void UBasicAttackAbility::InputReleased(const FGameplayAbilitySpecHandle Handle,
 
 void UBasicAttackAbility::OnTargetDataReady(const FGameplayAbilityTargetDataHandle& TargetDataHandle)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Target Data Ready for continuous attack!"));
-
 	FVector TargetLocation = FVector::ZeroVector;
 	
 	if (TargetDataHandle.Num() > 0) {
@@ -119,8 +113,6 @@ void UBasicAttackAbility::RequestNextAttack()
 	CurrentTargetDataTask = UTargetDataUnderMouse::CreateTargetDataUnderMouse(this);
 	CurrentTargetDataTask->ValidData.AddDynamic(this, &UBasicAttackAbility::OnTargetDataReady);
 	CurrentTargetDataTask->ReadyForActivation();
-
-	UE_LOG(LogTemp, Log, TEXT("Requested new TargetData for next attack"));
 }
 
 void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
@@ -149,7 +141,6 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 
 	if (Bullet) {
 		Bullet->SetOwner(GetAvatarActorFromActorInfo());
-		UE_LOG(LogTemp, Log, TEXT("Bullet fired at fresh target location!"));
 	}
 }
 

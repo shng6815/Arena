@@ -10,13 +10,13 @@
                         "text": "'UGameplayAbility::AbilityTags': Use GetAssetTags(). This is being made non-mutable, private and renamed to AssetTags in the future. Use SetAssetTags to set defaults (in constructor only). Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile."
                     },
                     "analysisTarget": {
-                        "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/Abilities/BasicAttackAbility.cpp"
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/Abilities/BasicAttackAbility.cpp"
                     },
                     "locations": [
                         {
                             "physicalLocation": {
                                 "artifactLocation": {
-                                    "uri": "file:///C:/Users/user/Documents/Arena/Arena/Source/Arena/Private/AbilitySystem/Abilities/BasicAttackAbility.cpp"
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/Abilities/BasicAttackAbility.cpp"
                                 },
                                 "region": {
                                     "startLine": 15,

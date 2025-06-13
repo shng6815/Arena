@@ -13,6 +13,14 @@ struct FArenaGameplayTags
 	FGameplayTag Abilities_Attack_Basic; // 기본 공격 어빌리티
 	FGameplayTag Damage; // 데미지 부모 태그
 	FGameplayTag Damage_Physical; // 물리 데미지 타입
+	
+	// Core Attribute Tags (새로 추가!)
+	FGameplayTag Attributes_Core_Durability;
+	FGameplayTag Attributes_Core_MaxDurability;
+	FGameplayTag Attributes_Core_Speed;
+	FGameplayTag Attributes_Core_Shield;
+	FGameplayTag Attributes_Core_MaxShield;
+	FGameplayTag Attributes_Core_Output;
 
 private:
 	static FArenaGameplayTags GameplayTags;

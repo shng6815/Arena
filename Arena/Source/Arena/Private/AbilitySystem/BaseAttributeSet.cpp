@@ -1,5 +1,6 @@
 ﻿// BaseAttributeSet.cpp
 #include "AbilitySystem/BaseAttributeSet.h"
+#include "ArenaGameplayTags.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GameplayEffectExtension.h"
 #include "GameFramework/Character.h"
@@ -15,6 +16,16 @@ UBaseAttributeSet::UBaseAttributeSet()
 	InitShield(50.0f);             // 실드 (방어력 수치)
 	InitMaxShield(50.0f);          // 최대 실드
 	InitOutput(10.0f);             // 출력 (공격력)
+
+	// AURA처럼 태그와 어트리뷰트 매핑 설정! (핵심 추가!)
+	const FArenaGameplayTags& GameplayTags = FArenaGameplayTags::Get();
+
+	TagsToAttributes.Add(GameplayTags.Attributes_Core_Durability, GetDurabilityAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Core_MaxDurability, GetMaxDurabilityAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Core_Speed, GetSpeedAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Core_Shield, GetShieldAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Core_MaxShield, GetMaxShieldAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Core_Output, GetOutputAttribute);
 }
 
 void UBaseAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

@@ -16,14 +16,14 @@ struct FGameplayAttributeData;
 #endif
 #define ARENA_BaseAttributeSet_generated_h
 
-#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_19_GENERATED_BODY \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_19_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FEffectProperties_Statics; \
 	ARENA_API static class UScriptStruct* StaticStruct();
 
 
 template<> ARENA_API UScriptStruct* StaticStruct<struct FEffectProperties>();
 
-#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_53_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_57_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execOnRep_Output); \
 	DECLARE_FUNCTION(execOnRep_MaxShield); \
 	DECLARE_FUNCTION(execOnRep_Shield); \
@@ -32,7 +32,7 @@ template<> ARENA_API UScriptStruct* StaticStruct<struct FEffectProperties>();
 	DECLARE_FUNCTION(execOnRep_Durability);
 
 
-#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_53_INCLASS_NO_PURE_DECLS \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_57_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUBaseAttributeSet(); \
 	friend struct Z_Construct_UClass_UBaseAttributeSet_Statics; \
@@ -55,7 +55,7 @@ private: \
 public:
 
 
-#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_53_ENHANCED_CONSTRUCTORS \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_57_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	UBaseAttributeSet(UBaseAttributeSet&&); \
@@ -67,13 +67,13 @@ public: \
 	NO_API virtual ~UBaseAttributeSet();
 
 
-#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_50_PROLOG
-#define FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_53_GENERATED_BODY \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_54_PROLOG
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_57_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_53_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_53_INCLASS_NO_PURE_DECLS \
-	FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_53_ENHANCED_CONSTRUCTORS \
+	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_57_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_57_INCLASS_NO_PURE_DECLS \
+	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h_57_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -81,7 +81,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> ARENA_API UClass* StaticClass<class UBaseAttributeSet>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h
+#define CURRENT_FILE_ID FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_AbilitySystem_BaseAttributeSet_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
