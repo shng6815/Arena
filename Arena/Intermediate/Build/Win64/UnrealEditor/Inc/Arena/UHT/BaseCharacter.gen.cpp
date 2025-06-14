@@ -12,7 +12,9 @@ void EmptyLinkFunctionForGeneratedCodeBaseCharacter() {}
 // Begin Cross Module References
 ARENA_API UClass* Z_Construct_UClass_ABaseCharacter();
 ARENA_API UClass* Z_Construct_UClass_ABaseCharacter_NoRegister();
+ARENA_API UClass* Z_Construct_UClass_UCombatInterface_NoRegister();
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 GAMEPLAYABILITIES_API UClass* Z_Construct_UClass_UAbilitySystemComponent_NoRegister();
 GAMEPLAYABILITIES_API UClass* Z_Construct_UClass_UAbilitySystemInterface_NoRegister();
@@ -238,6 +240,65 @@ DEFINE_FUNCTION(ABaseCharacter::execGetSpeed)
 }
 // End Class ABaseCharacter Function GetSpeed
 
+// Begin Class ABaseCharacter Function MulticastHandleDeath
+struct BaseCharacter_eventMulticastHandleDeath_Parms
+{
+	FVector DeathImpulse;
+};
+static const FName NAME_ABaseCharacter_MulticastHandleDeath = FName(TEXT("MulticastHandleDeath"));
+void ABaseCharacter::MulticastHandleDeath(FVector const& DeathImpulse)
+{
+	BaseCharacter_eventMulticastHandleDeath_Parms Parms;
+	Parms.DeathImpulse=DeathImpulse;
+	UFunction* Func = FindFunctionChecked(NAME_ABaseCharacter_MulticastHandleDeath);
+	ProcessEvent(Func,&Parms);
+}
+struct Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** end Combat Interface */// Death handling\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Character/BaseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "end Combat Interface // Death handling" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DeathImpulse_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStructPropertyParams NewProp_DeathImpulse;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::NewProp_DeathImpulse = { "DeathImpulse", nullptr, (EPropertyFlags)0x0010000008000082, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BaseCharacter_eventMulticastHandleDeath_Parms, DeathImpulse), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DeathImpulse_MetaData), NewProp_DeathImpulse_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::NewProp_DeathImpulse,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ABaseCharacter, nullptr, "MulticastHandleDeath", nullptr, nullptr, Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::PropPointers), sizeof(BaseCharacter_eventMulticastHandleDeath_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00824CC0, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::Function_MetaDataParams), Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::Function_MetaDataParams) };
+static_assert(sizeof(BaseCharacter_eventMulticastHandleDeath_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(ABaseCharacter::execMulticastHandleDeath)
+{
+	P_GET_STRUCT(FVector,Z_Param_DeathImpulse);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->MulticastHandleDeath_Implementation(Z_Param_DeathImpulse);
+	P_NATIVE_END;
+}
+// End Class ABaseCharacter Function MulticastHandleDeath
+
 // Begin Class ABaseCharacter Function SetSpeed
 struct Z_Construct_UFunction_ABaseCharacter_SetSpeed_Statics
 {
@@ -291,6 +352,7 @@ void ABaseCharacter::StaticRegisterNativesABaseCharacter()
 		{ "GetOutput", &ABaseCharacter::execGetOutput },
 		{ "GetShield", &ABaseCharacter::execGetShield },
 		{ "GetSpeed", &ABaseCharacter::execGetSpeed },
+		{ "MulticastHandleDeath", &ABaseCharacter::execMulticastHandleDeath },
 		{ "SetSpeed", &ABaseCharacter::execSetSpeed },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -307,6 +369,16 @@ struct Z_Construct_UClass_ABaseCharacter_Statics
 		{ "HideCategories", "Navigation" },
 		{ "IncludePath", "Character/BaseCharacter.h" },
 		{ "ModuleRelativePath", "Public/Character/BaseCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bDead_MetaData[] = {
+		{ "Category", "BaseCharacter" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Death state\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Character/BaseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Death state" },
+#endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AbilitySystemComponent_MetaData[] = {
 		{ "Category", "AbilitySystem" },
@@ -353,6 +425,8 @@ struct Z_Construct_UClass_ABaseCharacter_Statics
 #endif
 	};
 #endif // WITH_METADATA
+	static void NewProp_bDead_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bDead;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_AbilitySystemComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_AttributeSet;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_DefaultPrimaryAttributes;
@@ -368,6 +442,7 @@ struct Z_Construct_UClass_ABaseCharacter_Statics
 		{ &Z_Construct_UFunction_ABaseCharacter_GetOutput, "GetOutput" }, // 3560444221
 		{ &Z_Construct_UFunction_ABaseCharacter_GetShield, "GetShield" }, // 1592891310
 		{ &Z_Construct_UFunction_ABaseCharacter_GetSpeed, "GetSpeed" }, // 3385114541
+		{ &Z_Construct_UFunction_ABaseCharacter_MulticastHandleDeath, "MulticastHandleDeath" }, // 933362286
 		{ &Z_Construct_UFunction_ABaseCharacter_SetSpeed, "SetSpeed" }, // 1811868715
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -377,6 +452,11 @@ struct Z_Construct_UClass_ABaseCharacter_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
+void Z_Construct_UClass_ABaseCharacter_Statics::NewProp_bDead_SetBit(void* Obj)
+{
+	((ABaseCharacter*)Obj)->bDead = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_bDead = { "bDead", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ABaseCharacter), &Z_Construct_UClass_ABaseCharacter_Statics::NewProp_bDead_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bDead_MetaData), NewProp_bDead_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_AbilitySystemComponent = { "AbilitySystemComponent", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseCharacter, AbilitySystemComponent), Z_Construct_UClass_UAbilitySystemComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AbilitySystemComponent_MetaData), NewProp_AbilitySystemComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_AttributeSet = { "AttributeSet", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseCharacter, AttributeSet), Z_Construct_UClass_UAttributeSet_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AttributeSet_MetaData), NewProp_AttributeSet_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_DefaultPrimaryAttributes = { "DefaultPrimaryAttributes", nullptr, (EPropertyFlags)0x0024080000000015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseCharacter, DefaultPrimaryAttributes), Z_Construct_UClass_UClass, Z_Construct_UClass_UGameplayEffect_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DefaultPrimaryAttributes_MetaData), NewProp_DefaultPrimaryAttributes_MetaData) };
@@ -385,6 +465,7 @@ const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABaseCharacter_
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_StartupAbilities_Inner = { "StartupAbilities", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UClass, Z_Construct_UClass_UGameplayAbility_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ABaseCharacter_Statics::NewProp_StartupAbilities = { "StartupAbilities", nullptr, (EPropertyFlags)0x0024080000000001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseCharacter, StartupAbilities), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StartupAbilities_MetaData), NewProp_StartupAbilities_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseCharacter_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_bDead,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_AbilitySystemComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_AttributeSet,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseCharacter_Statics::NewProp_DefaultPrimaryAttributes,
@@ -401,6 +482,7 @@ UObject* (*const Z_Construct_UClass_ABaseCharacter_Statics::DependentSingletons[
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ABaseCharacter_Statics::DependentSingletons) < 16);
 const UECodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_ABaseCharacter_Statics::InterfaceParams[] = {
 	{ Z_Construct_UClass_UAbilitySystemInterface_NoRegister, (int32)VTABLE_OFFSET(ABaseCharacter, IAbilitySystemInterface), false },  // 2272790346
+	{ Z_Construct_UClass_UCombatInterface_NoRegister, (int32)VTABLE_OFFSET(ABaseCharacter, ICombatInterface), false },  // 727267323
 };
 const UECodeGen_Private::FClassParams Z_Construct_UClass_ABaseCharacter_Statics::ClassParams = {
 	&ABaseCharacter::StaticClass,
@@ -434,14 +516,14 @@ ABaseCharacter::~ABaseCharacter() {}
 // End Class ABaseCharacter
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ABaseCharacter, ABaseCharacter::StaticClass, TEXT("ABaseCharacter"), &Z_Registration_Info_UClass_ABaseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseCharacter), 4016433195U) },
+		{ Z_Construct_UClass_ABaseCharacter, ABaseCharacter::StaticClass, TEXT("ABaseCharacter"), &Z_Registration_Info_UClass_ABaseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseCharacter), 3507545260U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_1370091493(TEXT("/Script/Arena"),
-	Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_2365202323(TEXT("/Script/Arena"),
+	Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_user_Documents_Arena_Arena_Source_Arena_Public_Character_BaseCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

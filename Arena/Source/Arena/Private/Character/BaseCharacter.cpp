@@ -60,6 +60,14 @@ void ABaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	// 네트워크 복제할 변수들이 있으면 여기에 추가
 }
 
+float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
+	AActor* DamageCauser)
+{
+	const float DamageTaken = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	OnDamageDelegate.Broadcast(DamageTaken);
+	return DamageTaken;
+}
+
 UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
@@ -186,4 +194,50 @@ void ABaseCharacter::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffe
 	
 	AbilitySystemComponent->ApplyGameplayEffectSpecToTarget(
 		*SpecHandle.Data.Get(), AbilitySystemComponent);
+}
+
+// Combat Interface 구현
+bool ABaseCharacter::IsDead_Implementation() const
+{
+	return bDead;
+}
+
+AActor* ABaseCharacter::GetAvatar_Implementation()
+{
+	return this;
+}
+
+void ABaseCharacter::Die(const FVector& DeathImpulse)
+{
+	MulticastHandleDeath(DeathImpulse);
+}
+
+FOnDeathSignature& ABaseCharacter::GetOnDeathDelegate()
+{
+	return OnDeathDelegate;
+}
+
+FOnDamageSignature& ABaseCharacter::GetOnDamageSignature()
+{
+	return OnDamageDelegate;
+}
+
+FOnASCRegistered& ABaseCharacter::GetOnASCRegisteredDelegate()
+{
+	return OnASCRegistered;
+}
+
+void ABaseCharacter::MulticastHandleDeath_Implementation(const FVector& DeathImpulse)
+{
+	bDead = true;
+	
+	// 간단한 죽음 처리 - 나중에 확장 가능
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetEnableGravity(true);
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	GetMesh()->AddImpulse(DeathImpulse, NAME_None, true);
+	
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	
+	OnDeathDelegate.Broadcast(this);
 }

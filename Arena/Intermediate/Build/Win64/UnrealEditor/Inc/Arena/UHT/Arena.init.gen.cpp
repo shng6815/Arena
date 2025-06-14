@@ -8,6 +8,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeArena_init() {}
 	ARENA_API UFunction* Z_Construct_UDelegateFunction_Arena_MouseTargetDataSignature__DelegateSignature();
+	ARENA_API UFunction* Z_Construct_UDelegateFunction_Arena_OnDeathSignature__DelegateSignature();
 	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_Arena;
 	FORCENOINLINE UPackage* Z_Construct_UPackage__Script_Arena()
 	{
@@ -15,19 +16,20 @@ void EmptyLinkFunctionForGeneratedCodeArena_init() {}
 		{
 			static UObject* (*const SingletonFuncArray[])() = {
 				(UObject* (*)())Z_Construct_UDelegateFunction_Arena_MouseTargetDataSignature__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_Arena_OnDeathSignature__DelegateSignature,
 			};
 			static const UECodeGen_Private::FPackageParams PackageParams = {
 				"/Script/Arena",
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x4AB0081F,
-				0x215C013B,
+				0xF3533D85,
+				0x1EB8FE7B,
 				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_Arena.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_Arena.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_Arena(Z_Construct_UPackage__Script_Arena, TEXT("/Script/Arena"), Z_Registration_Info_UPackage__Script_Arena, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x4AB0081F, 0x215C013B));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_Arena(Z_Construct_UPackage__Script_Arena, TEXT("/Script/Arena"), Z_Registration_Info_UPackage__Script_Arena, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xF3533D85, 0x1EB8FE7B));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

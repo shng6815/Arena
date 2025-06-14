@@ -1,12 +1,12 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\shng6815\\onedrive - kookminuniv\\docs\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseattributeset.gen.cpp",
+        "Source": "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseattributeset.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "c:\\users\\shng6815\\onedrive - kookminuniv\\docs\\arena\\arena\\intermediate\\build\\win64\\x64\\arenaeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "PCH": "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\x64\\arenaeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
         "Includes": [
-            "c:\\users\\shng6815\\onedrive - kookminuniv\\docs\\arena\\arena\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\arena\\definitions.arena.h",
-            "c:\\users\\shng6815\\onedrive - kookminuniv\\docs\\arena\\arena\\source\\arena\\public\\abilitysystem\\baseattributeset.h",
+            "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\arena\\definitions.arena.h",
+            "c:\\users\\user\\documents\\arena\\arena\\source\\arena\\public\\abilitysystem\\baseattributeset.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\attributeset.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\intermediate\\build\\win64\\unrealeditor\\inc\\gameplayabilities\\uht\\attributeset.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\abilitysystemcomponent.h",
@@ -59,7 +59,7 @@
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\source\\gameplayabilities\\public\\abilitysystemreplicationproxyinterface.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\intermediate\\build\\win64\\unrealeditor\\inc\\gameplayabilities\\uht\\abilitysystemreplicationproxyinterface.generated.h",
             "c:\\program files\\epic games\\ue_5.5\\engine\\plugins\\runtime\\gameplayabilities\\intermediate\\build\\win64\\unrealeditor\\inc\\gameplayabilities\\uht\\abilitysystemcomponent.generated.h",
-            "c:\\users\\shng6815\\onedrive - kookminuniv\\docs\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseattributeset.generated.h"
+            "c:\\users\\user\\documents\\arena\\arena\\intermediate\\build\\win64\\unrealeditor\\inc\\arena\\uht\\baseattributeset.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []
