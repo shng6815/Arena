@@ -13,6 +13,7 @@ void EmptyLinkFunctionForGeneratedCodeSimpleBullet() {}
 // Begin Cross Module References
 ARENA_API UClass* Z_Construct_UClass_ASimpleBullet();
 ARENA_API UClass* Z_Construct_UClass_ASimpleBullet_NoRegister();
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 ENGINE_API UClass* Z_Construct_UClass_AActor();
 ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent_NoRegister();
@@ -20,6 +21,7 @@ ENGINE_API UClass* Z_Construct_UClass_UProjectileMovementComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USphereComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
+GAMEPLAYABILITIES_API UClass* Z_Construct_UClass_UGameplayEffect_NoRegister();
 UPackage* Z_Construct_UPackage__Script_Arena();
 // End Cross Module References
 
@@ -131,6 +133,10 @@ struct Z_Construct_UClass_ASimpleBullet_Statics
 		{ "IncludePath", "Actor/SimpleBullet.h" },
 		{ "ModuleRelativePath", "Public/Actor/SimpleBullet.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BaseDamage_MetaData[] = {
+		{ "Category", "Damage" },
+		{ "ModuleRelativePath", "Public/Actor/SimpleBullet.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CollisionSphere_MetaData[] = {
 		{ "Category", "Components" },
 #if !UE_BUILD_SHIPPING
@@ -166,12 +172,24 @@ struct Z_Construct_UClass_ASimpleBullet_Statics
 		{ "Category", "Bullet" },
 		{ "ModuleRelativePath", "Public/Actor/SimpleBullet.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DamageGameplayEffectClass_MetaData[] = {
+		{ "Category", "Damage" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// SimpleBullet.h\xec\x97\x90 \xec\xb6\x94\xea\xb0\x80\n" },
+#endif
+		{ "ModuleRelativePath", "Public/Actor/SimpleBullet.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "SimpleBullet.h\xec\x97\x90 \xec\xb6\x94\xea\xb0\x80" },
+#endif
+	};
 #endif // WITH_METADATA
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_BaseDamage;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CollisionSphere;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BulletMesh;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_ProjectileMovement;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_LifeSpan;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_BulletSpeed;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_DamageGameplayEffectClass;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -183,17 +201,21 @@ struct Z_Construct_UClass_ASimpleBullet_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASimpleBullet_Statics::NewProp_BaseDamage = { "BaseDamage", nullptr, (EPropertyFlags)0x0010000000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASimpleBullet, BaseDamage), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BaseDamage_MetaData), NewProp_BaseDamage_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASimpleBullet_Statics::NewProp_CollisionSphere = { "CollisionSphere", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASimpleBullet, CollisionSphere), Z_Construct_UClass_USphereComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CollisionSphere_MetaData), NewProp_CollisionSphere_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASimpleBullet_Statics::NewProp_BulletMesh = { "BulletMesh", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASimpleBullet, BulletMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BulletMesh_MetaData), NewProp_BulletMesh_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASimpleBullet_Statics::NewProp_ProjectileMovement = { "ProjectileMovement", nullptr, (EPropertyFlags)0x01240800000a001d, UECodeGen_Private::EPropertyGenFlags::Object | UECodeGen_Private::EPropertyGenFlags::ObjectPtr, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASimpleBullet, ProjectileMovement), Z_Construct_UClass_UProjectileMovementComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ProjectileMovement_MetaData), NewProp_ProjectileMovement_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASimpleBullet_Statics::NewProp_LifeSpan = { "LifeSpan", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASimpleBullet, LifeSpan), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LifeSpan_MetaData), NewProp_LifeSpan_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASimpleBullet_Statics::NewProp_BulletSpeed = { "BulletSpeed", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASimpleBullet, BulletSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BulletSpeed_MetaData), NewProp_BulletSpeed_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_ASimpleBullet_Statics::NewProp_DamageGameplayEffectClass = { "DamageGameplayEffectClass", nullptr, (EPropertyFlags)0x0024080000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASimpleBullet, DamageGameplayEffectClass), Z_Construct_UClass_UClass, Z_Construct_UClass_UGameplayEffect_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DamageGameplayEffectClass_MetaData), NewProp_DamageGameplayEffectClass_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASimpleBullet_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASimpleBullet_Statics::NewProp_BaseDamage,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASimpleBullet_Statics::NewProp_CollisionSphere,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASimpleBullet_Statics::NewProp_BulletMesh,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASimpleBullet_Statics::NewProp_ProjectileMovement,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASimpleBullet_Statics::NewProp_LifeSpan,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASimpleBullet_Statics::NewProp_BulletSpeed,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASimpleBullet_Statics::NewProp_DamageGameplayEffectClass,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASimpleBullet_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ASimpleBullet_Statics::DependentSingletons[])() = {
@@ -236,10 +258,10 @@ ASimpleBullet::~ASimpleBullet() {}
 struct Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Actor_SimpleBullet_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ASimpleBullet, ASimpleBullet::StaticClass, TEXT("ASimpleBullet"), &Z_Registration_Info_UClass_ASimpleBullet, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASimpleBullet), 38274383U) },
+		{ Z_Construct_UClass_ASimpleBullet, ASimpleBullet::StaticClass, TEXT("ASimpleBullet"), &Z_Registration_Info_UClass_ASimpleBullet, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASimpleBullet), 1662204449U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Actor_SimpleBullet_h_3954856384(TEXT("/Script/Arena"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Actor_SimpleBullet_h_3642414892(TEXT("/Script/Arena"),
 	Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Actor_SimpleBullet_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Actor_SimpleBullet_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

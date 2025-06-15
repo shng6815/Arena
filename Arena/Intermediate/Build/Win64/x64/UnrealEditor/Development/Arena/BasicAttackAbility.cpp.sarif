@@ -19,9 +19,66 @@
                                     "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/Abilities/BasicAttackAbility.cpp"
                                 },
                                 "region": {
-                                    "startLine": 15,
+                                    "startLine": 16,
                                     "startColumn": 2
                                 }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "ruleId": "C4996",
+                    "message": {
+                        "text": "'Cast::FStaticWarningMsg_158::condition': Attempting to use Cast<> on types that are not related"
+                    },
+                    "analysisTarget": {
+                        "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/Abilities/BasicAttackAbility.cpp"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "file:///C:/Program Files/Epic Games/UE_5.5/Engine/Source/Runtime/CoreUObject/Public/Templates/Casts.h"
+                                },
+                                "region": {
+                                    "startLine": 158,
+                                    "startColumn": 6
+                                }
+                            }
+                        }
+                    ],
+                    "relatedLocations": [
+                        {
+                            "id": 0,
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "file:///C:/Program Files/Epic Games/UE_5.5/Engine/Source/Runtime/CoreUObject/Public/Templates/Casts.h"
+                                },
+                                "region": {
+                                    "startLine": 158,
+                                    "startColumn": 6
+                                }
+                            },
+                            "message": {
+                                "text": "템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가"
+                            }
+                        },
+                        {
+                            "id": 1,
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "file:///C:/Users/shng6815/OneDrive - KookminUNIV/docs/Arena/Arena/Source/Arena/Private/AbilitySystem/Abilities/BasicAttackAbility.cpp"
+                                },
+                                "region": {
+                                    "startLine": 147,
+                                    "startColumn": 35
+                                }
+                            },
+                            "message": {
+                                "text": "컴파일되는 함수 템플릿 인스턴스화 'To *Cast<UBaseAttributeSet,UActorComponent>(From *)'에 대한 참조를 확인하세요.\n        with\n        [\n            To=UBaseAttributeSet,\n            From=UActorComponent\n        ]"
+                            },
+                            "properties": {
+                                "nestingLevel": 1
                             }
                         }
                     ]
