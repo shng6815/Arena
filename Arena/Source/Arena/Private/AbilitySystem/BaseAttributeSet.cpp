@@ -16,6 +16,7 @@ UBaseAttributeSet::UBaseAttributeSet()
 	InitShield(50.0f);             // 실드 (방어력 수치)
 	InitMaxShield(50.0f);          // 최대 실드
 	InitOutput(10.0f);             // 출력 (공격력)
+	InitIncomingDamage(0.0f);      // 들어오는 데미지 (기본값 0)
 
 	// AURA처럼 태그와 어트리뷰트 매핑 설정! (핵심 추가!)
 	const FArenaGameplayTags& GameplayTags = FArenaGameplayTags::Get();
@@ -26,6 +27,8 @@ UBaseAttributeSet::UBaseAttributeSet()
 	TagsToAttributes.Add(GameplayTags.Attributes_Core_Shield, GetShieldAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Core_MaxShield, GetMaxShieldAttribute);
 	TagsToAttributes.Add(GameplayTags.Attributes_Core_Output, GetOutputAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Meta_IncomingDamage, GetIncomingDamageAttribute);
+	
 }
 
 void UBaseAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -39,6 +42,7 @@ void UBaseAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	DOREPLIFETIME_CONDITION_NOTIFY(UBaseAttributeSet, Shield, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UBaseAttributeSet, MaxShield, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UBaseAttributeSet, Output, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UBaseAttributeSet, IncomingDamage, COND_None, REPNOTIFY_Always);
 }
 
 void UBaseAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)

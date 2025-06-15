@@ -98,6 +98,9 @@ public:
 	FGameplayAttributeData Output;
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Output);
 
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, IncomingDamage);
 
 
 	// RepNotify functions

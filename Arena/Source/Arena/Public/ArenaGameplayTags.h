@@ -22,6 +22,9 @@ struct FArenaGameplayTags
 	FGameplayTag Attributes_Core_MaxShield;
 	FGameplayTag Attributes_Core_Output;
 
+	// Meta Attribute Tags
+	FGameplayTag Attributes_Meta_IncomingDamage;
+
 private:
 	static FArenaGameplayTags GameplayTags;
 };
