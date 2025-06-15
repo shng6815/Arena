@@ -1,6 +1,7 @@
 ﻿#include "AbilitySystem/Abilities/BasicAttackAbility.h"
 
 #include "ArenaGameplayTags.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 #include "AbilitySystem/AbilityTasks/TargetDataUnderMouse.h"
 #include "Actor/SimpleBullet.h"
 #include "GameFramework/Character.h"
@@ -16,9 +17,9 @@ UBasicAttackAbility::UBasicAttackAbility()
 }
 
 void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
-										  const FGameplayAbilityActorInfo* ActorInfo,
-										  const FGameplayAbilityActivationInfo ActivationInfo,
-										  const FGameplayEventData* TriggerEventData)
+                                          const FGameplayAbilityActorInfo* ActorInfo,
+                                          const FGameplayAbilityActivationInfo ActivationInfo,
+                                          const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
@@ -29,20 +30,22 @@ void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 }
 
 void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
-									 const FGameplayAbilityActorInfo* ActorInfo,
-									 const FGameplayAbilityActivationInfo ActivationInfo,
-									 bool bReplicateEndAbility,
-									 bool bWasCancelled)
+                                     const FGameplayAbilityActorInfo* ActorInfo,
+                                     const FGameplayAbilityActivationInfo ActivationInfo,
+                                     bool bReplicateEndAbility,
+                                     bool bWasCancelled)
 {
 	bIsAttacking = false;
 
 	// 타이머 정리
-	if (HasAuthority(&ActivationInfo) && AttackTimerHandle.IsValid()) {
+	if (HasAuthority(&ActivationInfo) && AttackTimerHandle.IsValid())
+	{
 		GetWorld()->GetTimerManager().ClearTimer(AttackTimerHandle);
 	}
 
 	// 현재 TargetDataTask 정리
-	if (CurrentTargetDataTask) {
+	if (CurrentTargetDataTask)
+	{
 		CurrentTargetDataTask->EndTask();
 		CurrentTargetDataTask = nullptr;
 	}
@@ -51,8 +54,8 @@ void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
 }
 
 void UBasicAttackAbility::InputReleased(const FGameplayAbilitySpecHandle Handle,
-										const FGameplayAbilityActorInfo* ActorInfo,
-										const FGameplayAbilityActivationInfo ActivationInfo)
+                                        const FGameplayAbilityActorInfo* ActorInfo,
+                                        const FGameplayAbilityActivationInfo ActivationInfo)
 {
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }
@@ -60,17 +63,21 @@ void UBasicAttackAbility::InputReleased(const FGameplayAbilitySpecHandle Handle,
 void UBasicAttackAbility::OnTargetDataReady(const FGameplayAbilityTargetDataHandle& TargetDataHandle)
 {
 	FVector TargetLocation = FVector::ZeroVector;
-	
-	if (TargetDataHandle.Num() > 0) {
+
+	if (TargetDataHandle.Num() > 0)
+	{
 		// 현재 커서 위치 받기
 		const FHitResult* HitResult = TargetDataHandle.Get(0)->GetHitResult();
-		if (HitResult && HitResult->bBlockingHit) {
+		if (HitResult && HitResult->bBlockingHit)
+		{
 			TargetLocation = HitResult->ImpactPoint;
 		}
-		else {
+		else
+		{
 			// 히트가 없으면 캐릭터 앞쪽으로 기본 설정
 			ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-			if (Character) {
+			if (Character)
+			{
 				TargetLocation = Character->GetActorLocation() + Character->GetActorForwardVector() * 1000.0f;
 			}
 		}
@@ -83,29 +90,33 @@ void UBasicAttackAbility::OnTargetDataReady(const FGameplayAbilityTargetDataHand
 	CurrentTargetDataTask = nullptr;
 
 	// 연속 공격이 활성화되어 있으면 다음 공격 예약
-	if (bIsAttacking && AttackRate > 0.0f) {
+	if (bIsAttacking && AttackRate > 0.0f)
+	{
 		float AttackInterval = 1.0f / AttackRate;
 		GetWorld()->GetTimerManager().SetTimer(AttackTimerHandle,
-											   [this]()
-											   {
-												   if (bIsAttacking) {
-													   // 다음 공격을 위한 새로운 TargetData 요청!
-													   RequestNextAttack();
-												   }
-											   },
-											   AttackInterval,
-											   false); // 한 번만 실행
+		                                       [this]()
+		                                       {
+			                                       if (bIsAttacking)
+			                                       {
+				                                       // 다음 공격을 위한 새로운 TargetData 요청!
+				                                       RequestNextAttack();
+			                                       }
+		                                       },
+		                                       AttackInterval,
+		                                       false); // 한 번만 실행
 	}
 }
 
 void UBasicAttackAbility::RequestNextAttack()
 {
-	if (!bIsAttacking) {
+	if (!bIsAttacking)
+	{
 		return;
 	}
 
 	// 이전 TargetDataTask가 있으면 정리
-	if (CurrentTargetDataTask) {
+	if (CurrentTargetDataTask)
+	{
 		CurrentTargetDataTask->EndTask();
 	}
 
@@ -117,12 +128,14 @@ void UBasicAttackAbility::RequestNextAttack()
 
 void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 {
-	if (!BulletClass) {
+	if (!BulletClass)
+	{
 		return;
 	}
 
 	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-	if (!Character) {
+	if (!Character)
+	{
 		return;
 	}
 
@@ -139,14 +152,24 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 	ASimpleBullet* Bullet = GetWorld()->SpawnActor<ASimpleBullet>(
 		BulletClass, SpawnTransform, FActorSpawnParameters());
 
-	if (Bullet) {
+	if (Bullet)
+	{
 		Bullet->SetOwner(GetAvatarActorFromActorInfo());
+
+		// 데미지 설정 (Output 어트리뷰트 기반)
+		if (UBaseAttributeSet* BaseAS = Cast<UBaseAttributeSet>(
+			GetAbilitySystemComponentFromActorInfo()->GetAvatarActor()->GetComponentByClass(
+				UBaseAttributeSet::StaticClass())))
+		{
+			Bullet->BaseDamage = BaseAS->GetOutput(); // 공격력 = Output 스탯
+		}
 	}
 }
 
 FVector UBasicAttackAbility::GetMuzzleLocation(ACharacter* Character)
 {
-	if (!Character) {
+	if (!Character)
+	{
 		return FVector::ZeroVector;
 	}
 

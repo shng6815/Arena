@@ -66,4 +66,9 @@ void FArenaGameplayTags::InitializeNativeGameplayTags()
 		FName("Attributes.Core.Output"),
 		FString("출력 - 공격력과 기능 효율성을 결정")
 	);
+
+	GameplayTags.Attributes_Meta_IncomingDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Meta.IncomingDamage"),
+		FString("메타 속성 - 들어오는 데미지에 대한 메타 정보")
+	);
 }

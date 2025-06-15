@@ -18,7 +18,9 @@ struct FEffectProperties
 {
 	GENERATED_BODY()
 
-	FEffectProperties(){}
+	FEffectProperties()
+	{
+	}
 
 	FGameplayEffectContextHandle EffectContextHandle;
 
@@ -48,7 +50,7 @@ struct FEffectProperties
 };
 
 // AURA처럼 함수 포인터 타입 정의
-template<class T>
+template <class T>
 using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
 
 UCLASS()
@@ -69,7 +71,7 @@ public:
 	/*
 	 * 게임 핵심 스탯 4개
 	 */
-	
+
 	// 내구도 (체력)
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Durability, Category = "Core Attributes")
 	FGameplayAttributeData Durability;
@@ -124,4 +126,5 @@ public:
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
+	void HandleIncomingDamage(const FEffectProperties& Props);
 };

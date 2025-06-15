@@ -1,4 +1,13 @@
 ﻿#include "Public/Actor/SimpleBullet.h"
+
+#include <AbilitySystemBlueprintLibrary.h>
+#include <AbilitySystemComponent.h>
+#include <AbilitySystemInterface.h>
+#include <GameFramework/PlayerState.h>
+
+#include "ArenaAbilityTypes.h"
+#include "ArenaGameplayTags.h"
+#include "AbilitySystem/ArenaAbilitySystemLibrary.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
 
@@ -25,7 +34,8 @@ ASimpleBullet::ASimpleBullet()
 
 	// 기본 구체 메시 사용 (나중에 총알 메시로 교체)
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> SphereMesh(TEXT("/Engine/BasicShapes/Sphere"));
-	if (SphereMesh.Succeeded()) {
+	if (SphereMesh.Succeeded())
+	{
 		BulletMesh->SetStaticMesh(SphereMesh.Object);
 		BulletMesh->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.5f)); // 총알 모양으로
 	}
@@ -50,8 +60,6 @@ void ASimpleBullet::BeginPlay()
 
 	// 발사자 저장 (충돌 방지용)
 	ShooterActor = GetOwner();
-
-	UE_LOG(LogTemp, Log, TEXT("Simple Bullet spawned with speed: %f"), BulletSpeed);
 }
 
 void ASimpleBullet::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent,
@@ -61,24 +69,93 @@ void ASimpleBullet::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent,
                                     bool bFromSweep,
                                     const FHitResult& SweepResult)
 {
-	// 이미 히트했거나 발사자와 충돌하면 무시
-	if (bHit || OtherActor == ShooterActor || !OtherActor) {
+	if (bHit || OtherActor == ShooterActor || !OtherActor)
+	{
 		return;
 	}
 
 	bHit = true;
 
-	// 간단한 로그 출력
-	UE_LOG(LogTemp, Warning, TEXT("Bullet hit: %s"), *OtherActor->GetName());
-
-	// 화면에 메시지 표시 (디버그용)
-	if (GEngine) {
-		FString HitMessage = FString::Printf(TEXT("Bullet hit: %s"), *OtherActor->GetName());
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, HitMessage);
-	}
-
-	// 총알 파괴 (서버에서만)
-	if (HasAuthority()) {
+	// 데미지 적용 (서버에서만)
+	if (HasAuthority())
+	{
+		ApplyDamageToTarget(OtherActor);
 		Destroy();
 	}
+}
+
+void ASimpleBullet::ApplyDamageToTarget(AActor* Target)
+{
+	if (!DamageGameplayEffectClass || !Target)
+	{
+		return;
+	}
+
+	// ASC 찾기 - AURA 방식으로 개선!
+	UAbilitySystemComponent* TargetASC = GetASCFromActor(Target);
+	UAbilitySystemComponent* SourceASC = GetASCFromActor(ShooterActor);
+
+	UE_LOG(LogTemp, Warning, TEXT("Target: %s, TargetASC: %s"),
+	       *Target->GetName(),
+	       TargetASC ? TEXT("Found") : TEXT("NULL"));
+
+	UE_LOG(LogTemp, Warning, TEXT("Shooter: %s, SourceASC: %s"),
+	       ShooterActor ? *ShooterActor->GetName() : TEXT("NULL"),
+	       SourceASC ? TEXT("Found") : TEXT("NULL"));
+
+	if (!TargetASC || !SourceASC)
+	{
+		UE_LOG(LogTemp, Error, TEXT("ASC not found! Target ASC: %s, Source ASC: %s"),
+		       TargetASC ? TEXT("OK") : TEXT("MISSING"),
+		       SourceASC ? TEXT("OK") : TEXT("MISSING"));
+		return;
+	}
+
+	// AURA 방식으로 데미지 파라미터 설정
+	FDamageEffectParams DamageParams;
+	DamageParams.WorldContextObject = this;
+	DamageParams.DamageGameplayEffectClass = DamageGameplayEffectClass;
+	DamageParams.SourceAbilitySystemComponent = SourceASC;
+	DamageParams.TargetAbilitySystemComponent = TargetASC;
+	DamageParams.BaseDamage = BaseDamage;
+	DamageParams.AbilityLevel = 1.0f;
+	DamageParams.DamageType = FArenaGameplayTags::Get().Damage_Physical;
+
+	UE_LOG(LogTemp, Warning, TEXT("Applying damage: %s to %s with base damage: %f"),
+	       *ShooterActor->GetName(), *Target->GetName(), BaseDamage);
+
+	// 데미지 적용!
+	UArenaAbilitySystemLibrary::ApplyDamageEffect(DamageParams);
+}
+
+UAbilitySystemComponent* ASimpleBullet::GetASCFromActor(AActor* Actor)
+{
+	if (!Actor)
+	{
+		return nullptr;
+	}
+
+	// 방법 1: IAbilitySystemInterface 체크 (가장 안전!)
+	if (IAbilitySystemInterface* ASI = Cast<IAbilitySystemInterface>(Actor))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found ASC via IAbilitySystemInterface: %s"), *Actor->GetName());
+		return ASI->GetAbilitySystemComponent();
+	}
+
+	// 방법 2: PlayerState에서 찾기 (PlayerCharacter용)
+	if (APawn* Pawn = Cast<APawn>(Actor))
+	{
+		if (APlayerState* PS = Pawn->GetPlayerState())
+		{
+			if (IAbilitySystemInterface* PSInterface = Cast<IAbilitySystemInterface>(PS))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Found ASC via PlayerState: %s"), *PS->GetName());
+				return PSInterface->GetAbilitySystemComponent();
+			}
+		}
+	}
+
+	// 방법 3: 직접 컴포넌트 찾기 (마지막 수단)
+	UE_LOG(LogTemp, Warning, TEXT("Finding ASC directly from Actor: %s"), *Actor->GetName());
+	return Actor->FindComponentByClass<UAbilitySystemComponent>();
 }
