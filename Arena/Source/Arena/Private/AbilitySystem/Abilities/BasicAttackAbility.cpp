@@ -142,27 +142,44 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 	// 머즐 위치에서 타겟 위치로의 방향 계산
 	FVector MuzzleLocation = GetMuzzleLocation(Character);
 	FVector Direction = (TargetLocation - MuzzleLocation);
-	Direction.Z = 0.0f; // 수평 발사
+	Direction.Z = 0.0f;
 	Direction.Normalize();
 
 	FTransform SpawnTransform;
 	SpawnTransform.SetLocation(MuzzleLocation);
 	SpawnTransform.SetRotation(Direction.Rotation().Quaternion());
 
-	ASimpleBullet* Bullet = GetWorld()->SpawnActor<ASimpleBullet>(
-		BulletClass, SpawnTransform, FActorSpawnParameters());
+	// AURA 방식! - DamageEffectParams를 미리 완전히 세팅
+	FDamageEffectParams DamageParams;
+	DamageParams.WorldContextObject = this;
+	DamageParams.DamageGameplayEffectClass = DamageGameplayEffectClass; // <- 여기서 설정!
+	DamageParams.SourceAbilitySystemComponent = GetAbilitySystemComponentFromActorInfo();
+
+	// Output 스탯 기반 데미지 (나중에 레벨링 시 확장 가능)
+	if (UBaseAttributeSet* BaseAS = Cast<UBaseAttributeSet>(
+		GetAbilitySystemComponentFromActorInfo()->GetAvatarActor()->GetComponentByClass(
+			UBaseAttributeSet::StaticClass())))
+	{
+		DamageParams.BaseDamage = BaseAS->GetOutput();
+		UE_LOG(LogTemp, Warning, TEXT("Base Damage: %f"), DamageParams.BaseDamage);
+	}
+
+	DamageParams.AbilityLevel = 1.0f; // 일단 고정
+	DamageParams.DamageType = FArenaGameplayTags::Get().Damage_Physical;
+
+	// AURA 방식 스폰! - GetOwningActorFromActorInfo() 사용
+	ASimpleBullet* Bullet = GetWorld()->SpawnActorDeferred<ASimpleBullet>(
+		BulletClass,
+		SpawnTransform,
+		GetOwningActorFromActorInfo(),
+		Cast<APawn>(GetOwningActorFromActorInfo()),
+		ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 
 	if (Bullet)
 	{
-		Bullet->SetOwner(GetAvatarActorFromActorInfo());
-
-		// 데미지 설정 (Output 어트리뷰트 기반)
-		if (UBaseAttributeSet* BaseAS = Cast<UBaseAttributeSet>(
-			GetAbilitySystemComponentFromActorInfo()->GetAvatarActor()->GetComponentByClass(
-				UBaseAttributeSet::StaticClass())))
-		{
-			Bullet->BaseDamage = BaseAS->GetOutput(); // 공격력 = Output 스탯
-		}
+		// AURA 방식! - 완전히 준비된 DamageEffectParams 전달
+		Bullet->DamageEffectParams = DamageParams;
+		Bullet->FinishSpawning(SpawnTransform);
 	}
 }
 

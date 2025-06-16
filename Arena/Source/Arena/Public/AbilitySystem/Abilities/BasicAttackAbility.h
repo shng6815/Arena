@@ -15,21 +15,24 @@ class ARENA_API UBasicAttackAbility : public UBaseGameplayAbility
 public:
 	UBasicAttackAbility();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage")
+	TSubclassOf<UGameplayEffect> DamageGameplayEffectClass;
+
 protected:
-	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, 
-								const FGameplayAbilityActorInfo* ActorInfo, 
-								const FGameplayAbilityActivationInfo ActivationInfo, 
-								const FGameplayEventData* TriggerEventData) override;
+	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle,
+	                             const FGameplayAbilityActorInfo* ActorInfo,
+	                             const FGameplayAbilityActivationInfo ActivationInfo,
+	                             const FGameplayEventData* TriggerEventData) override;
 
-	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, 
-							const FGameplayAbilityActorInfo* ActorInfo, 
-							const FGameplayAbilityActivationInfo ActivationInfo, 
-							bool bReplicateEndAbility, 
-							bool bWasCancelled) override;
+	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle,
+	                        const FGameplayAbilityActorInfo* ActorInfo,
+	                        const FGameplayAbilityActivationInfo ActivationInfo,
+	                        bool bReplicateEndAbility,
+	                        bool bWasCancelled) override;
 
-	virtual void InputReleased(const FGameplayAbilitySpecHandle Handle, 
-							  const FGameplayAbilityActorInfo* ActorInfo, 
-							  const FGameplayAbilityActivationInfo ActivationInfo) override;
+	virtual void InputReleased(const FGameplayAbilitySpecHandle Handle,
+	                           const FGameplayAbilityActorInfo* ActorInfo,
+	                           const FGameplayAbilityActivationInfo ActivationInfo) override;
 
 	// Target Data 콜백 - 매번 새로운 위치로 발사!
 	UFUNCTION()
@@ -50,7 +53,7 @@ protected:
 private:
 	FTimerHandle AttackTimerHandle;
 	bool bIsAttacking = false;
-	
+
 	// 현재 활성화된 TargetDataTask (정리용)
 	UPROPERTY()
 	TObjectPtr<UTargetDataUnderMouse> CurrentTargetDataTask;

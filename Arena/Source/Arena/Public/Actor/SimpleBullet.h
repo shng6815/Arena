@@ -1,11 +1,8 @@
-﻿#pragma once
-
-#include <AbilitySystemComponent.h>
-
-#include "CoreMinimal.h"
+﻿#include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "ArenaAbilityTypes.h"  // <- 핵심 추가!
 #include "SimpleBullet.generated.h"
 
 UCLASS()
@@ -16,13 +13,13 @@ class ARENA_API ASimpleBullet : public AActor
 public:
 	ASimpleBullet();
 
-	UPROPERTY(EditDefaultsOnly, Category = "Damage")
-	float BaseDamage = 10.0f;
+	// AURA 방식으로 변경! - 이미 완성된 DamageEffectParams를 받아옴
+	UPROPERTY(BlueprintReadWrite, meta = (ExposeOnSpawn = true))
+	FDamageEffectParams DamageEffectParams;
 
 protected:
 	virtual void BeginPlay() override;
 
-	// 간단한 히트 처리 (로그만)
 	UFUNCTION()
 	void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent,
 	                     AActor* OtherActor,
@@ -48,14 +45,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Bullet")
 	float BulletSpeed = 3000.0f;
 
-	// SimpleBullet.h에 추가
-	UPROPERTY(EditDefaultsOnly, Category = "Damage")
-	TSubclassOf<class UGameplayEffect> DamageGameplayEffectClass;
-
 private:
 	bool bHit = false;
-	AActor* ShooterActor = nullptr;
 
 	void ApplyDamageToTarget(AActor* Target);
-	UAbilitySystemComponent* GetASCFromActor(AActor* Actor);
 };

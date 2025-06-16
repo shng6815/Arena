@@ -13,7 +13,6 @@
 			"BaseGameplayAbility.gen.cpp.obj",
 			"BasePlayerController.gen.cpp.obj",
 			"BasePlayerState.gen.cpp.obj",
-			"BasicAttackAbility.gen.cpp.obj",
 			"CombatInterface.gen.cpp.obj",
 			"PlayerCharacter.gen.cpp.obj",
 			"TargetDataUnderMouse.gen.cpp.obj",
@@ -25,8 +24,10 @@
 			"TargetDataUnderMouse.cpp.obj",
 			"ArenaAbilitySystemLibrary.cpp.obj",
 			"BaseAbilitySystemComponent.cpp.obj",
+			"BaseAttributeSet.cpp.obj",
 			"ArenaAbilityTypes.cpp.obj",
 			"ArenaAssetManager.cpp.obj",
+			"ArenaGameplayTags.cpp.obj",
 			"BaseCharacter.cpp.obj",
 			"PlayerCharacter.cpp.obj",
 			"ArenaInputComponent.cpp.obj",
@@ -37,11 +38,10 @@
 			"Arena.init.gen.cpp.obj",
 			"ArenaAbilitySystemLibrary.gen.cpp.obj",
 			"ArenaAbilityTypes.gen.cpp.obj",
+			"BasicAttackAbility.gen.cpp.obj",
 			"SimpleBullet.gen.cpp.obj",
 			"BasicAttackAbility.cpp.obj",
-			"BaseAttributeSet.cpp.obj",
-			"SimpleBullet.cpp.obj",
-			"ArenaGameplayTags.cpp.obj"
+			"SimpleBullet.cpp.obj"
 		]
 	}
 }
