@@ -1,0 +1,18 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-Arena-6941.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\ArenaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\Module.Arena.cpp.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\ArenaGameplayTags.cpp.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\SimpleBullet.cpp.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\Arena.init.gen.cpp.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\ArenaAbilitySystemLibrary.gen.cpp.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\ArenaAbilityTypes.gen.cpp.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\SimpleBullet.gen.cpp.obj"
+"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\Default.rc2.res"
+/OUT:"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\UnrealEditor-Arena-6941.lib"

@@ -34,13 +34,38 @@ void UBaseAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf
 
 void UBaseAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& InputTag)
 {
-	if (!InputTag.IsValid()) return;
-	
+	UE_LOG(LogTemp, Warning, TEXT("BaseASC::AbilityInputTagPressed called with tag: %s"), *InputTag.ToString());
+    
+	if (!InputTag.IsValid()) {
+		UE_LOG(LogTemp, Error, TEXT("InputTag is not valid!"));
+		return;
+	}
+    
 	FScopedAbilityListLock ActiveScopeLoc(*this);
+    
+	// 모든 어빌리티 목록 출력
+	UE_LOG(LogTemp, Warning, TEXT("Total activatable abilities: %d"), GetActivatableAbilities().Num());
+    
+	int32 FoundCount = 0;
 	for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 	{
+		UE_LOG(LogTemp, Log, TEXT("Checking ability: %s"), 
+			   AbilitySpec.Ability ? *AbilitySpec.Ability->GetClass()->GetName() : TEXT("NULL"));
+        
+		// DynamicAbilityTags 출력
+		FString TagString;
+		for (const FGameplayTag& Tag : AbilitySpec.DynamicAbilityTags)
+		{
+			TagString += Tag.ToString() + TEXT(", ");
+		}
+		UE_LOG(LogTemp, Log, TEXT("  DynamicAbilityTags: %s"), *TagString);
+        
 		if (AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag))
 		{
+			UE_LOG(LogTemp, Warning, TEXT("FOUND MATCHING ABILITY: %s"), 
+				   *AbilitySpec.Ability->GetClass()->GetName());
+			FoundCount++;
+            
 			AbilitySpecInputPressed(AbilitySpec);
 			if (AbilitySpec.IsActive())
 			{
@@ -49,6 +74,11 @@ void UBaseAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag& Inp
 									AbilitySpec.ActivationInfo.GetActivationPredictionKey());
 			}
 		}
+	}
+    
+	if (FoundCount == 0)
+	{
+		UE_LOG(LogTemp, Error, TEXT("NO ABILITY FOUND for InputTag: %s"), *InputTag.ToString());
 	}
 }
 

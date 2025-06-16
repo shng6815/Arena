@@ -9,14 +9,27 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UOmegaClassData;
+class USimpleOmegaComponent;
 #ifdef ARENA_PlayerCharacter_generated_h
 #error "PlayerCharacter.generated.h already included, missing '#pragma once' in PlayerCharacter.h"
 #endif
 #define ARENA_PlayerCharacter_generated_h
 
-#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void RevertOmegaVisuals_Implementation(UOmegaClassData* ClassData); \
+	virtual void RevertOmegaChanges_Implementation(); \
 	virtual void ServerSetSpineRotation_Implementation(float Rotation); \
+	DECLARE_FUNCTION(execRevertDefaultVisualChanges); \
+	DECLARE_FUNCTION(execRevertOmegaStats); \
+	DECLARE_FUNCTION(execRevertOmegaVisuals); \
+	DECLARE_FUNCTION(execRevertOmegaChanges); \
+	DECLARE_FUNCTION(execOnOmegaStateChanged); \
 	DECLARE_FUNCTION(execServerSetSpineRotation); \
+	DECLARE_FUNCTION(execGetOmegaComponent); \
+	DECLARE_FUNCTION(execIsStealOnCooldown); \
+	DECLARE_FUNCTION(execCanBeStolen); \
+	DECLARE_FUNCTION(execIsOmega); \
 	DECLARE_FUNCTION(execIsMoving); \
 	DECLARE_FUNCTION(execGetMovementDirection); \
 	DECLARE_FUNCTION(execGetMovementSpeed); \
@@ -24,8 +37,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execSetSpineRotation);
 
 
-#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_CALLBACK_WRAPPERS
-#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_INCLASS_NO_PURE_DECLS \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_CALLBACK_WRAPPERS
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAPlayerCharacter(); \
 	friend struct Z_Construct_UClass_APlayerCharacter_Statics; \
@@ -40,7 +53,7 @@ public: \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
-#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_ENHANCED_CONSTRUCTORS \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	APlayerCharacter(APlayerCharacter&&); \
@@ -52,14 +65,14 @@ public: \
 	NO_API virtual ~APlayerCharacter();
 
 
-#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_10_PROLOG
-#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_GENERATED_BODY \
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_12_PROLOG
+#define FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_CALLBACK_WRAPPERS \
-	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_INCLASS_NO_PURE_DECLS \
-	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_13_ENHANCED_CONSTRUCTORS \
+	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_CALLBACK_WRAPPERS \
+	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Users_shng6815_OneDrive___KookminUNIV_docs_Arena_Arena_Source_Arena_Public_Character_PlayerCharacter_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
