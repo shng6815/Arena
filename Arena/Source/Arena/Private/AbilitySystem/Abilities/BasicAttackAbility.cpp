@@ -1,11 +1,15 @@
 ﻿#include "AbilitySystem/Abilities/BasicAttackAbility.h"
 
+#include <GameplayTagsManager.h>
+
 #include "ArenaGameplayTags.h"
 #include "AbilitySystem/BaseAttributeSet.h"
 #include "AbilitySystem/AbilityTasks/TargetDataUnderMouse.h"
 #include "Actor/SimpleBullet.h"
+#include "Character/PlayerCharacter.h"
 #include "GameFramework/Character.h"
 #include "Engine/World.h"
+#include "Player/BasePlayerState.h"
 
 UBasicAttackAbility::UBasicAttackAbility()
 {
@@ -149,25 +153,35 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 	SpawnTransform.SetLocation(MuzzleLocation);
 	SpawnTransform.SetRotation(Direction.Rotation().Quaternion());
 
-	// AURA 방식! - DamageEffectParams를 미리 완전히 세팅
+	// DamageEffectParams 설정
 	FDamageEffectParams DamageParams;
 	DamageParams.WorldContextObject = this;
-	DamageParams.DamageGameplayEffectClass = DamageGameplayEffectClass; // <- 여기서 설정!
+	DamageParams.DamageGameplayEffectClass = DamageGameplayEffectClass;
 	DamageParams.SourceAbilitySystemComponent = GetAbilitySystemComponentFromActorInfo();
 
-	// Output 스탯 기반 데미지 (나중에 레벨링 시 확장 가능)
-	if (UBaseAttributeSet* BaseAS = Cast<UBaseAttributeSet>(
-		GetAbilitySystemComponentFromActorInfo()->GetAvatarActor()->GetComponentByClass(
-			UBaseAttributeSet::StaticClass())))
+	// Output 스탯 기반 데미지 계산
+	float BaseDamage = 10.0f; // 기본값
+
+	if (APlayerCharacter* PlayerChar = Cast<APlayerCharacter>(Character))
 	{
-		DamageParams.BaseDamage = BaseAS->GetOutput();
-		UE_LOG(LogTemp, Warning, TEXT("Base Damage: %f"), DamageParams.BaseDamage);
+		if (ABasePlayerState* PlayerState = PlayerChar->GetPlayerState<ABasePlayerState>())
+		{
+			if (UBaseAttributeSet* BaseAS = PlayerState->GetBaseAttributeSet())
+			{
+				BaseDamage = BaseAS->GetOutput();
+			}
+		}
 	}
 
-	DamageParams.AbilityLevel = 1.0f; // 일단 고정
+	DamageParams.BaseDamage = BaseDamage;
+	DamageParams.AbilityLevel = 1.0f;
 	DamageParams.DamageType = FArenaGameplayTags::Get().Damage_Physical;
 
-	// AURA 방식 스폰! - GetOwningActorFromActorInfo() 사용
+	UE_LOG(LogTemp, Warning, TEXT("Damage Params - BaseDamage: %f, DamageType: %s"),
+	       DamageParams.BaseDamage,
+	       *DamageParams.DamageType.ToString());
+
+	// 총알 생성
 	ASimpleBullet* Bullet = GetWorld()->SpawnActorDeferred<ASimpleBullet>(
 		BulletClass,
 		SpawnTransform,
@@ -177,7 +191,6 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 
 	if (Bullet)
 	{
-		// AURA 방식! - 완전히 준비된 DamageEffectParams 전달
 		Bullet->DamageEffectParams = DamageParams;
 		Bullet->FinishSpawning(SpawnTransform);
 	}

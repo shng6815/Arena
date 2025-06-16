@@ -12,8 +12,12 @@ UArenaAssetManager& UArenaAssetManager::Get()
 void UArenaAssetManager::StartInitialLoading()
 {
 	Super::StartInitialLoading();
-
-	// 필수 초기화
+    
+	UE_LOG(LogTemp, Warning, TEXT("ArenaAssetManager::StartInitialLoading() - Initializing GameplayTags..."));
+    
+	// GameplayTags 초기화 - 이 부분이 핵심!
 	FArenaGameplayTags::InitializeNativeGameplayTags();
+    
+	UE_LOG(LogTemp, Warning, TEXT("ArenaAssetManager::StartInitialLoading() complete"));
 	UAbilitySystemGlobals::Get().InitGlobalData();
 }
