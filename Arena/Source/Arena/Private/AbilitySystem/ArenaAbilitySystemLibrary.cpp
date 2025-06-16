@@ -14,10 +14,6 @@ FGameplayEffectContextHandle UArenaAbilitySystemLibrary::ApplyDamageEffect(
 	const FArenaGameplayTags& GameplayTags = FArenaGameplayTags::Get();
 	const AActor* SourceAvatarActor = DamageEffectParams.SourceAbilitySystemComponent->GetAvatarActor();
 
-	// 검증 로그 추가
-	UE_LOG(LogTemp, Warning, TEXT("ApplyDamageEffect - BaseDamage: %f, DamageType: %s"),
-	       DamageEffectParams.BaseDamage,
-	       *DamageEffectParams.DamageType.ToString());
 
 	if (!DamageEffectParams.DamageGameplayEffectClass)
 	{
@@ -48,11 +44,6 @@ FGameplayEffectContextHandle UArenaAbilitySystemLibrary::ApplyDamageEffect(
 		return EffectContextHandle;
 	}
 
-	// SetByCaller로 데미지 값 설정 - 이 부분이 핵심!
-	UE_LOG(LogTemp, Warning, TEXT("Setting SetByCaller - Tag: %s, Magnitude: %f"),
-	       *DamageEffectParams.DamageType.ToString(),
-	       DamageEffectParams.BaseDamage);
-
 	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, DamageEffectParams.DamageType,
 	                                                              DamageEffectParams.BaseDamage);
 
@@ -60,13 +51,10 @@ FGameplayEffectContextHandle UArenaAbilitySystemLibrary::ApplyDamageEffect(
 	if (SpecHandle.Data.IsValid())
 	{
 		float SetValue = SpecHandle.Data->GetSetByCallerMagnitude(DamageEffectParams.DamageType);
-		UE_LOG(LogTemp, Warning, TEXT("Verified SetByCaller value: %f"), SetValue);
 	}
 
 	// 타겟에게 이펙트 적용
 	DamageEffectParams.TargetAbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data);
-
-	UE_LOG(LogTemp, Warning, TEXT("Damage effect applied successfully!"));
 
 	return EffectContextHandle;
 }

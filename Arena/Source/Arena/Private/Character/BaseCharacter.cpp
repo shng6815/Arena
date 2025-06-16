@@ -164,21 +164,16 @@ void ABaseCharacter::AddCharacterAbilities()
 		UE_LOG(LogTemp, Error, TEXT("AddCharacterAbilities: No ASC!"));
 		return;
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("AddCharacterAbilities: StartupAbilities count = %d"), StartupAbilities.Num());
-
+	
 	// AURA 방식: ASC에서만 처리하게 하기!
 	if (UBaseAbilitySystemComponent* BaseASC = Cast<UBaseAbilitySystemComponent>(AbilitySystemComponent))
 	{
 		BaseASC->AddCharacterAbilities(StartupAbilities);
-		UE_LOG(LogTemp, Warning, TEXT("Called BaseASC->AddCharacterAbilities"));
 	}
 	else
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to cast to BaseAbilitySystemComponent!"));
 	}
-    
-	// 기존 for loop 코드는 제거!
 }
 
 void ABaseCharacter::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const

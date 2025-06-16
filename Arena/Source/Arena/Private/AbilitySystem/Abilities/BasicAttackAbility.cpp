@@ -18,6 +18,7 @@ UBasicAttackAbility::UBasicAttackAbility()
 
 	StartupInputTag = FArenaGameplayTags::Get().InputTag_LMB;
 	AbilityTags.AddTag(FArenaGameplayTags::Get().Abilities_Attack_Basic);
+	DamageType = FArenaGameplayTags::Get().Damage_Physical;
 }
 
 void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
@@ -26,7 +27,7 @@ void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handl
                                           const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-
+	
 	bIsAttacking = true;
 
 	// 첫 번째 공격을 위한 TargetData 요청
@@ -132,6 +133,9 @@ void UBasicAttackAbility::RequestNextAttack()
 
 void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 {
+	if (!HasAuthority(&CurrentActivationInfo))
+		return;
+	
 	if (!BulletClass)
 	{
 		return;
@@ -175,11 +179,7 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 
 	DamageParams.BaseDamage = BaseDamage;
 	DamageParams.AbilityLevel = 1.0f;
-	DamageParams.DamageType = FArenaGameplayTags::Get().Damage_Physical;
-
-	UE_LOG(LogTemp, Warning, TEXT("Damage Params - BaseDamage: %f, DamageType: %s"),
-	       DamageParams.BaseDamage,
-	       *DamageParams.DamageType.ToString());
+	DamageParams.DamageType = DamageType;
 
 	// 총알 생성
 	ASimpleBullet* Bullet = GetWorld()->SpawnActorDeferred<ASimpleBullet>(

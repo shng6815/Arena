@@ -15,6 +15,9 @@ class ARENA_API UBasicAttackAbility : public UBaseGameplayAbility
 public:
 	UBasicAttackAbility();
 
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	FGameplayTag DamageType;
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage")
 	TSubclassOf<UGameplayEffect> DamageGameplayEffectClass;
 

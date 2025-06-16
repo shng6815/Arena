@@ -142,8 +142,6 @@ void UBaseAttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
 	const float LocalIncomingDamage = GetIncomingDamage();
 	SetIncomingDamage(0.0f); // 즉시 리셋
 
-	UE_LOG(LogTemp, Warning, TEXT("Incoming Damage: %f"), LocalIncomingDamage);
-
 	if (LocalIncomingDamage > 0.0f)
 	{
 		// 실드 먼저 계산
@@ -171,10 +169,6 @@ void UBaseAttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
 				}
 			}
 		}
-
-		// 로그 출력 (디버그용)
-		UE_LOG(LogTemp, Warning, TEXT("Damage Applied: %f, Shield: %f, Durability: %f"),
-		       LocalIncomingDamage, GetShield(), GetDurability());
 	}
 }
 
