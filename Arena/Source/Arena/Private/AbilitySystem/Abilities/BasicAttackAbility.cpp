@@ -1,7 +1,4 @@
 ﻿#include "AbilitySystem/Abilities/BasicAttackAbility.h"
-
-#include <GameplayTagsManager.h>
-
 #include "ArenaGameplayTags.h"
 #include "AbilitySystem/BaseAttributeSet.h"
 #include "AbilitySystem/AbilityTasks/TargetDataUnderMouse.h"
@@ -19,19 +16,19 @@ UBasicAttackAbility::UBasicAttackAbility()
 	StartupInputTag = FArenaGameplayTags::Get().InputTag_LMB;
 	AbilityTags.AddTag(FArenaGameplayTags::Get().Abilities_Attack_Basic);
 	DamageType = FArenaGameplayTags::Get().Damage_Physical;
+	
+	bHasBlueprintActivate = true;
+	bHasBlueprintActivateFromEvent = true;
 }
 
 void UBasicAttackAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
-                                          const FGameplayAbilityActorInfo* ActorInfo,
-                                          const FGameplayAbilityActivationInfo ActivationInfo,
-                                          const FGameplayEventData* TriggerEventData)
+										  const FGameplayAbilityActorInfo* ActorInfo,
+										  const FGameplayAbilityActivationInfo ActivationInfo,
+										  const FGameplayEventData* TriggerEventData)
 {
+	bHasProcessedTargetData = false;
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-	
-	bIsAttacking = true;
-
-	// 첫 번째 공격을 위한 TargetData 요청
-	RequestNextAttack();
+	RequestTargetData();
 }
 
 void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
@@ -40,16 +37,7 @@ void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
                                      bool bReplicateEndAbility,
                                      bool bWasCancelled)
 {
-	bIsAttacking = false;
-
-	// 타이머 정리
-	if (HasAuthority(&ActivationInfo) && AttackTimerHandle.IsValid())
-	{
-		GetWorld()->GetTimerManager().ClearTimer(AttackTimerHandle);
-	}
-
-	// 현재 TargetDataTask 정리
-	if (CurrentTargetDataTask)
+	if (CurrentTargetDataTask && IsValid(CurrentTargetDataTask))
 	{
 		CurrentTargetDataTask->EndTask();
 		CurrentTargetDataTask = nullptr;
@@ -58,96 +46,76 @@ void UBasicAttackAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 
-void UBasicAttackAbility::InputReleased(const FGameplayAbilitySpecHandle Handle,
-                                        const FGameplayAbilityActorInfo* ActorInfo,
-                                        const FGameplayAbilityActivationInfo ActivationInfo)
+void UBasicAttackAbility::RequestTargetData()
 {
-	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
+	// 이전 Task 정리
+	if (CurrentTargetDataTask && IsValid(CurrentTargetDataTask))
+	{
+		CurrentTargetDataTask->ValidData.RemoveDynamic(this, &UBasicAttackAbility::OnTargetDataReady);
+		CurrentTargetDataTask->EndTask();
+		CurrentTargetDataTask = nullptr;
+	}
+
+	// 새 Task 생성 및 바인딩
+	CurrentTargetDataTask = UTargetDataUnderMouse::CreateTargetDataUnderMouse(this);
+	if (CurrentTargetDataTask)
+	{
+		CurrentTargetDataTask->ValidData.AddDynamic(this, &UBasicAttackAbility::OnTargetDataReady);
+		CurrentTargetDataTask->ReadyForActivation();
+	}
 }
 
 void UBasicAttackAbility::OnTargetDataReady(const FGameplayAbilityTargetDataHandle& TargetDataHandle)
 {
-	FVector TargetLocation = FVector::ZeroVector;
+	// 중복 실행 방지
+	if (bHasProcessedTargetData) return;
+	bHasProcessedTargetData = true;
 
+	// TargetData에서 위치 추출
+	FVector TargetLocation = FVector::ZeroVector;
 	if (TargetDataHandle.Num() > 0)
 	{
-		// 현재 커서 위치 받기
 		const FHitResult* HitResult = TargetDataHandle.Get(0)->GetHitResult();
 		if (HitResult && HitResult->bBlockingHit)
 		{
 			TargetLocation = HitResult->ImpactPoint;
 		}
-		else
+		else if (ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo()))
 		{
-			// 히트가 없으면 캐릭터 앞쪽으로 기본 설정
-			ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-			if (Character)
-			{
-				TargetLocation = Character->GetActorLocation() + Character->GetActorForwardVector() * 1000.0f;
-			}
+			TargetLocation = Character->GetActorLocation() + Character->GetActorForwardVector() * 1000.0f;
 		}
-
-		// 현재 위치로 총알 발사
-		FireBulletAtTarget(TargetLocation);
 	}
-
-	// 현재 TargetDataTask 정리
-	CurrentTargetDataTask = nullptr;
-
-	// 연속 공격이 활성화되어 있으면 다음 공격 예약
-	if (bIsAttacking && AttackRate > 0.0f)
+	
+	// Task 정리
+	if (CurrentTargetDataTask && IsValid(CurrentTargetDataTask))
 	{
-		float AttackInterval = 1.0f / AttackRate;
-		GetWorld()->GetTimerManager().SetTimer(AttackTimerHandle,
-		                                       [this]()
-		                                       {
-			                                       if (bIsAttacking)
-			                                       {
-				                                       // 다음 공격을 위한 새로운 TargetData 요청!
-				                                       RequestNextAttack();
-			                                       }
-		                                       },
-		                                       AttackInterval,
-		                                       false); // 한 번만 실행
+		CurrentTargetDataTask->ValidData.RemoveDynamic(this, &UBasicAttackAbility::OnTargetDataReady);
+		CurrentTargetDataTask->EndTask();
+		CurrentTargetDataTask = nullptr;
 	}
+	
+	// 위치 캐싱 후 공격 시퀀스 시작
+	CachedTargetLocation = TargetLocation;
+	StartAttackSequence(TargetLocation);
 }
 
-void UBasicAttackAbility::RequestNextAttack()
+void UBasicAttackAbility::SpawnProjectile(const FVector& TargetLocation)
 {
-	if (!bIsAttacking)
-	{
-		return;
-	}
+	// 서버에서만 실행
+	if (!GetAvatarActorFromActorInfo()->HasAuthority()) return;
 
-	// 이전 TargetDataTask가 있으면 정리
-	if (CurrentTargetDataTask)
-	{
-		CurrentTargetDataTask->EndTask();
-	}
-
-	// 새로운 TargetData 요청
-	CurrentTargetDataTask = UTargetDataUnderMouse::CreateTargetDataUnderMouse(this);
-	CurrentTargetDataTask->ValidData.AddDynamic(this, &UBasicAttackAbility::OnTargetDataReady);
-	CurrentTargetDataTask->ReadyForActivation();
+	FVector FinalTargetLocation = !CachedTargetLocation.IsZero() ? CachedTargetLocation : TargetLocation;
+	FireBulletAtTarget(FinalTargetLocation);
 }
 
 void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 {
-	if (!HasAuthority(&CurrentActivationInfo))
-		return;
-	
-	if (!BulletClass)
-	{
-		return;
-	}
+	if (!BulletClass) return;
 
 	ACharacter* Character = Cast<ACharacter>(GetAvatarActorFromActorInfo());
-	if (!Character)
-	{
-		return;
-	}
+	if (!Character) return;
 
-	// 머즐 위치에서 타겟 위치로의 방향 계산
+	// 총알 생성 위치 및 방향 계산
 	FVector MuzzleLocation = GetMuzzleLocation(Character);
 	FVector Direction = (TargetLocation - MuzzleLocation);
 	Direction.Z = 0.0f;
@@ -164,8 +132,7 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 	DamageParams.SourceAbilitySystemComponent = GetAbilitySystemComponentFromActorInfo();
 
 	// Output 스탯 기반 데미지 계산
-	float BaseDamage = 10.0f; // 기본값
-
+	float BaseDamage = 10.0f;
 	if (APlayerCharacter* PlayerChar = Cast<APlayerCharacter>(Character))
 	{
 		if (ABasePlayerState* PlayerState = PlayerChar->GetPlayerState<ABasePlayerState>())
@@ -198,14 +165,27 @@ void UBasicAttackAbility::FireBulletAtTarget(const FVector& TargetLocation)
 
 FVector UBasicAttackAbility::GetMuzzleLocation(ACharacter* Character)
 {
-	if (!Character)
+	if (!Character) return FVector::ZeroVector;
+
+	// 소켓 기반 위치 계산
+	if (USkeletalMeshComponent* Mesh = Character->GetMesh())
 	{
-		return FVector::ZeroVector;
+		if (Mesh->DoesSocketExist(FName("WeaponSocket")))
+			return Mesh->GetSocketLocation(FName("WeaponSocket"));
+		
+		if (Mesh->DoesSocketExist(FName("RightHandSocket")))
+			return Mesh->GetSocketLocation(FName("RightHandSocket"));
 	}
 
+	// 기본 위치 계산
 	FVector CharacterLocation = Character->GetActorLocation();
 	FVector ForwardOffset = Character->GetActorForwardVector() * 100.0f;
 	FVector HeightOffset = FVector(0, 0, 50.0f);
 
 	return CharacterLocation + ForwardOffset + HeightOffset;
+}
+
+void UBasicAttackAbility::FinishAttack()
+{
+	EndAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo, true, false);
 }

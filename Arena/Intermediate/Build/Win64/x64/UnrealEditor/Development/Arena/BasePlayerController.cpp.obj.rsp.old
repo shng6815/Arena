@@ -1,12 +1,12 @@
-"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Source\Arena\Private\Player\BasePlayerController.cpp"
-/FI"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\ArenaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/FI"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\Definitions.Arena.h"
-/Yu"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\ArenaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/Fp"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\ArenaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
-/Fo"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\BasePlayerController.cpp.obj"
-/experimental:log "C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\BasePlayerController.cpp.sarif"
-/sourceDependencies "C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\BasePlayerController.cpp.dep.json"
-@"C:\Users\shng6815\OneDrive - KookminUNIV\docs\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\Arena.Shared.rsp"
+"C:\Users\user\Documents\Arena\Arena\Source\Arena\Private\Player\BasePlayerController.cpp"
+/FI"C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\ArenaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/FI"C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\Definitions.Arena.h"
+/Yu"C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\ArenaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/Fp"C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\ArenaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
+/Fo"C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\BasePlayerController.cpp.obj"
+/experimental:log "C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\BasePlayerController.cpp.sarif"
+/sourceDependencies "C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\BasePlayerController.cpp.dep.json"
+@"C:\Users\user\Documents\Arena\Arena\Intermediate\Build\Win64\x64\UnrealEditor\Development\Arena\Arena.Shared.rsp"
 /d2ssa-cfg-question-
 /Zc:inline
 /nologo

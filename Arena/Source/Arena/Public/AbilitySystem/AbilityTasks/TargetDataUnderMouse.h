@@ -17,9 +17,11 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FMouseTargetDataSignature ValidData;
-
-private:
+	
+protected:
 	virtual void Activate() override;
+	
+private:
 	void SendMouseCursorData();
 	void OnTargetDataReplicatedCallback(const FGameplayAbilityTargetDataHandle& DataHandle, FGameplayTag ActivationTag);
 };
